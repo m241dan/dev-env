@@ -7,3 +7,6 @@
 [submodule "themes/zsh/powerlevel10k"]
 	path = themes/zsh/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k
+[submodule "plugins/nvim/lazy.nvim"]
+	path = plugins/nvim/lazy.nvim
+	url = https://github.com/folke/lazy.nvim.git
