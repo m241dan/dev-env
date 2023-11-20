@@ -14,6 +14,9 @@ ARG UID=1000
 ARG GID=1000
 ARG HOME=/home/$USER
 ARG OHMYZSHHOME=$HOME/.oh-my-zsh
+ARG NVIM_CONFIG=$HOME/.config/nvim
+ARG NVIM_SHARE=$HOME/.local/share/nvim
+ARG NVIM_PLUGINS=$NVIM_SHARE/plugins
 
 # Required environmentals
 ENV DEBIAN_FRONTEND=noninteractive
@@ -47,6 +50,8 @@ COPY dotfiles/zsh/p10k.zsh $HOME/.p10k.zsh
 # Setup Neovim
 COPY software/neovim /neovim
 RUN cd neovim && make CMAKE_BUILD_TYPE=Release && make install
+COPY dotfiles/nvim/open-env $NVIM_CONFIG
+COPY plugins/nvim/ $NVIM_PLUGINS
 
 # Final settings (leave the image in the state we want to enter)
 RUN chown -R $USER:$USER $HOME  # deal with anything installed / setup as root
