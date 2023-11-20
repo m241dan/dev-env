@@ -1,0 +1,9 @@
+[submodule "software/neovim"]
+	path = software/neovim
+	url = https://github.com/neovim/neovim
+[submodule "software/ohmyzsh"]
+	path = software/ohmyzsh
+	url = https://github.com/ohmyzsh/ohmyzsh
+[submodule "themes/zsh/powerlevel10k"]
+	path = themes/zsh/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
