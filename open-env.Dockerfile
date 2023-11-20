@@ -44,7 +44,7 @@ RUN useradd -m -d $HOME -s /bin/zsh -u $UID -g $GID $USER
 # Setup zsh customizations
 COPY software/ohmyzsh $OHMYZSHHOME
 COPY themes/zsh/powerlevel10k $OHMYZSHHOME/custom/themes/powerlevel10k
-COPY dotfiles/zsh/rc.zsh $HOME/.zshrc
+COPY dotfiles/zsh/zshrc $HOME/.zshrc
 COPY dotfiles/zsh/p10k.zsh $HOME/.p10k.zsh
 
 # Setup Neovim
