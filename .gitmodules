@@ -10,3 +10,12 @@
 [submodule "plugins/nvim/lazy.nvim"]
 	path = plugins/nvim/lazy.nvim
 	url = https://github.com/folke/lazy.nvim.git
+[submodule "plugins/nvim/plenary.nvim"]
+	path = plugins/nvim/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "plugins/nvim/telescope-fzf-native.nvim"]
+	path = plugins/nvim/telescope-fzf-native.nvim
+	url = https://github.com/nvim-telescope/telescope-fzf-native.nvim
+[submodule "plugins/nvim/telescope.nvim"]
+	path = plugins/nvim/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim
