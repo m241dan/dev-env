@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gdb \
     ninja-build \
     gettext \
-    cmake \
+    make \
     unzip \
     curl \
     git \
@@ -44,6 +44,12 @@ COPY themes/zsh/powerlevel10k $OHMYZSHHOME/custom/themes/powerlevel10k
 COPY dotfiles/zsh/rc.zsh $HOME/.zshrc
 COPY dotfiles/zsh/p10k.zsh $HOME/.p10k.zsh
 
+# Setup Neovim
+COPY software/neovim /neovim
+RUN cd neovim && make CMAKE_BUILD_TYPE=Release && make install
+
+# Final settings (leave the image in the state we want to enter)
+RUN chown -R $USER:$USER $HOME  # deal with anything installed / setup as root
 USER $USER
 WORKDIR $HOME
 
