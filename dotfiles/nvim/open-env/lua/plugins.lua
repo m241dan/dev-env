@@ -3,7 +3,7 @@ local path = vim.fn.stdpath("data") .. "/plugins/lazy.nvim"
 vim.opt.rtp:append(path)
 
 local plugins = {
-   -- Tree-sitter
+   -- Telescope
    {
        'nvim-telescope/telescope.nvim',
        branch = '0.1.x',
@@ -17,6 +17,20 @@ local plugins = {
                 end,
            },
        },
+   },
+
+   -- Tree-sitter
+   {
+       "nvim-treesitter/nvim-treesitter",
+       build = ':TSUpdate',
+   },
+
+   -- Darcula Theme
+   {
+       "xiantang/darcula-dark.nvim",
+       config = function()
+           vim.cmd.colorscheme("darcula-dark")
+       end,
    },
 }
 

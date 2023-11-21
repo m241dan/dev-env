@@ -19,3 +19,21 @@
 [submodule "plugins/nvim/telescope.nvim"]
 	path = plugins/nvim/telescope.nvim
 	url = https://github.com/nvim-telescope/telescope.nvim
+[submodule "plugins/nvim/tree-sitter-c"]
+	path = plugins/nvim/tree-sitter-c
+	url = https://github.com/tree-sitter/tree-sitter-c
+[submodule "plugins/nvim/tree-sitter-cpp"]
+	path = plugins/nvim/tree-sitter-cpp
+	url = https://github.com/tree-sitter/tree-sitter-cpp
+[submodule "plugins/nvim/tree-sitter-python"]
+	path = plugins/nvim/tree-sitter-python
+	url = https://github.com/tree-sitter/tree-sitter-python
+[submodule "plugins/nvim/tree-sitter-lua"]
+	path = plugins/nvim/tree-sitter-lua
+	url = https://github.com/MunifTanjim/tree-sitter-lua
+[submodule "plugins/nvim/nvim-treesitter"]
+	path = plugins/nvim/nvim-treesitter
+	url = https://github.com/nvim-telescope/telescope.nvim
+[submodule "plugins/nvim/darcula-dark.nvim"]
+	path = plugins/nvim/darcula-dark.nvim
+	url = https://github.com/xiantang/darcula-dark.nvim
