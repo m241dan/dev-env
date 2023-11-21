@@ -53,6 +53,9 @@ RUN cd neovim && make CMAKE_BUILD_TYPE=Release && make install
 COPY dotfiles/nvim/open-env $NVIM_CONFIG
 COPY plugins/nvim/ $NVIM_PLUGINS
 
+# Setup git config for zsh
+RUN git config --global --replace-all core.pager "less -F -X"
+
 # Final settings (leave the image in the state we want to enter)
 RUN chown -R $USER:$USER $HOME  # deal with anything installed / setup as root
 USER $USER
