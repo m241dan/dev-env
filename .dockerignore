@@ -1,1 +1,2 @@
 software/ohmyzsh/custom/themes/powerlevel10k
+plugins/nvim/nvim-treesitter/parser/*.so
