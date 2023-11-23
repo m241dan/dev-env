@@ -34,7 +34,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git \
     ca-certificates \
-    zsh
+    zsh \
+    python3 \
+    python3-pip \
+    python3-venv
 
 # Setup our user
 RUN userdel -r ubuntu
