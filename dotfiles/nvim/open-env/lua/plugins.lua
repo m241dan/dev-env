@@ -37,6 +37,12 @@ local plugins = {
    "neovim/nvim-lspconfig",
    {"j-hui/fidget.nvim", tag = 'legacy', opts = {}}, -- A progress bar for what the LSP is doing
    "folke/neodev.nvim", -- lsp support for lua when working on vim specific things
+
+   -- Auto complete and snippet support
+   "hrsh7th/nvim-cmp",
+   "L3MON4D3/LuaSnip",
+   "saadparwaiz1/cmp_luasnip",
+   "hrsh7th/cmp-nvim-lsp",
 }
 
 local options = {
