@@ -32,6 +32,11 @@ local plugins = {
            vim.cmd.colorscheme("darcula-dark")
        end,
    },
+
+   -- LSP
+   "neovim/nvim-lspconfig",
+   {"j-hui/fidget.nvim", tag = 'legacy', opts = {}}, -- A progress bar for what the LSP is doing
+   "folke/neodev.nvim", -- lsp support for lua when working on vim specific things
 }
 
 local options = {
