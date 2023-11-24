@@ -33,4 +33,3 @@ vim.api.nvim_create_autocmd('filetype', {
   end
 })
 
-
