@@ -37,3 +37,24 @@
 [submodule "plugins/nvim/darcula-dark.nvim"]
 	path = plugins/nvim/darcula-dark.nvim
 	url = https://github.com/xiantang/darcula-dark.nvim
+[submodule "plugins/nvim/LuaSnip"]
+	path = plugins/nvim/LuaSnip
+	url = https://github.com/L3MON4D3/LuaSnip
+[submodule "plugins/nvim/cmp-nvim-lsp"]
+	path = plugins/nvim/cmp-nvim-lsp
+	url = https://github.com/hrsh7th/cmp-nvim-lsp
+[submodule "plugins/nvim/cmp_luasnip"]
+	path = plugins/nvim/cmp_luasnip
+	url = https://github.com/saadparwaiz1/cmp_luasnip
+[submodule "plugins/nvim/fidget.nvim"]
+	path = plugins/nvim/fidget.nvim
+	url = https://github.com/j-hui/fidget.nvim
+[submodule "plugins/nvim/neodev.nvim"]
+	path = plugins/nvim/neodev.nvim
+	url = https://github.com/folke/neodev.nvim
+[submodule "plugins/nvim/nvim-cmp"]
+	path = plugins/nvim/nvim-cmp
+	url = https://github.com/hrsh7th/nvim-cmp
+[submodule "plugins/nvim/nvim-lspconfig"]
+	path = plugins/nvim/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig
