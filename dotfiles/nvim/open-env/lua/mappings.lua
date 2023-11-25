@@ -3,6 +3,7 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 
 -- Normal mode keymaps
+vim.keymap.set('n', '<leader><leader>', "<Insert>")
 vim.keymap.set('n', 'j', "<Left>")
 vim.keymap.set('n', 'l', "<Right>")
 vim.keymap.set('n', 'i', "<Up>")
