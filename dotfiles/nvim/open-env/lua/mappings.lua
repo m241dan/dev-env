@@ -11,6 +11,11 @@ vim.keymap.set('n', 'J', "<Home>")
 vim.keymap.set('n', 'L', "<End>")
 vim.keymap.set('n', 'I', "<C-u>zz")
 vim.keymap.set('n', 'K', "<C-d>zz")
+vim.keymap.set('n', '<leader>di', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<leader>di', "<cmd>lua vim.diagnostic.goto_prev()<CR><Insert>")
+vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>dK', "<cmd>lua vim.diagnostic.goto_next()<CR><Insert>")
+
 
 -- Insert mode keymaps
 vim.keymap.set('n', '<C-I>', "<Insert>")
