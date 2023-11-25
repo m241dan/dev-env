@@ -26,7 +26,6 @@ vim.keymap.set('n', '<leader>wl', "<C-W>l") -- Move to the window right of the c
 vim.keymap.set('n', '<leader>wj', "<C-W>h") -- Move to the window left of the current
 
 -- Insert mode keymaps
-vim.keymap.set('n', '<C-I>', "<Insert>")
 vim.keymap.set('i', '<C-D>', "<Esc>")
 
 -- Visual mode keymaps
