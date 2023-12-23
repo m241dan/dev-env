@@ -58,3 +58,12 @@
 [submodule "plugins/nvim/nvim-lspconfig"]
 	path = plugins/nvim/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
+[submodule "plugins/tmux/tpm"]
+	path = plugins/tmux/tpm
+	url = https://github.com/tmux-plugins/tpm.git
+[submodule "plugins/tmux/tmux-sensible"]
+	path = plugins/tmux/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible
+[submodule "themes/tmux/tmux2k"]
+	path = themes/tmux/tmux2k
+	url = https://github.com/2KAbhishek/tmux2k.git

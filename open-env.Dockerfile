@@ -18,6 +18,8 @@ ARG NVIM_CONFIG=$HOME/.config/nvim
 ARG NVIM_SHARE=$HOME/.local/share/nvim
 ARG NVIM_PLUGINS=$NVIM_SHARE/plugins
 ARG NVIM_LSPS=$NVIM_SHARE/lsps
+ARG TMUX_HOME=$HOME/.tmux
+ARG TMUX_PLUGINS=$TMUX_HOME/plugins
 
 # Required environmentals
 ENV DEBIAN_FRONTEND=noninteractive
@@ -44,7 +46,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
     python3-venv \
-    gh
+    gh \
+    tmux
 
 # Setup our user
 RUN userdel -r ubuntu
@@ -56,12 +59,17 @@ COPY software/ohmyzsh $OHMYZSHHOME
 COPY themes/zsh/powerlevel10k $OHMYZSHHOME/custom/themes/powerlevel10k
 COPY dotfiles/zsh/zshrc $HOME/.zshrc
 COPY dotfiles/zsh/p10k.zsh $HOME/.p10k.zsh
+COPY dotfiles/zsh/aliases $HOME/.aliases
 
 # Setup Neovim
 COPY software/neovim /neovim
 RUN cd neovim && make CMAKE_BUILD_TYPE=Release && make install
 COPY dotfiles/nvim/open-env $NVIM_CONFIG
 COPY plugins/nvim/ $NVIM_PLUGINS
+
+# Setup Tmux conf
+COPY dotfiles/tmux/tmux.conf $HOME/.tmux.conf
+COPY plugins/tmux/ $TMUX_PLUGINS
 
 # Create directory for LSPs
 RUN mkdir -p $NVIM_LSPS
@@ -84,4 +92,6 @@ RUN git config --global --replace-all core.pager "less -F -X"
 RUN chown -R $USER:$USER $HOME  # deal with anything installed / setup as root
 USER $USER
 WORKDIR $HOME
+
+CMD tmux -u
 
