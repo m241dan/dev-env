@@ -54,25 +54,12 @@ RUN userdel -r ubuntu
 RUN groupadd -g $GID $USER
 RUN useradd -m -d $HOME -s /bin/zsh -u $UID -g $GID $USER
 
-# Setup zsh customizations
-COPY software/ohmyzsh $OHMYZSHHOME
-COPY themes/zsh/powerlevel10k $OHMYZSHHOME/custom/themes/powerlevel10k
-COPY dotfiles/zsh/zshrc $HOME/.zshrc
-COPY dotfiles/zsh/p10k.zsh $HOME/.p10k.zsh
-COPY dotfiles/zsh/aliases $HOME/.aliases
-
-# Setup Neovim
-COPY software/neovim /neovim
-RUN cd neovim && make CMAKE_BUILD_TYPE=Release && make install
-COPY dotfiles/nvim/open-env $NVIM_CONFIG
-COPY plugins/nvim/ $NVIM_PLUGINS
-
-# Setup Tmux conf
-COPY dotfiles/tmux/tmux.conf $HOME/.tmux.conf
-COPY plugins/tmux/ $TMUX_PLUGINS
-
-# Create directory for LSPs
+# Create directory necessary file structure in the container
 RUN mkdir -p $NVIM_LSPS
+
+#
+# Get external packages and install
+#
 
 # Get clangd
 RUN curl -fsSL https://github.com/clangd/clangd/releases/download/17.0.3/clangd-linux-17.0.3.zip | dd of=clangd.zip \
@@ -81,6 +68,32 @@ RUN curl -fsSL https://github.com/clangd/clangd/releases/download/17.0.3/clangd-
 # Get lua-language-server
 RUN curl -fsSL https://github.com/LuaLS/lua-language-server/releases/download/3.7.3/lua-language-server-3.7.3-linux-x64.tar.gz | dd of=lua-language-server.tar.gz \
     && mkdir -p $NVIM_LSPS/lua-language-server && tar -xzf lua-language-server.tar.gz -C $NVIM_LSPS/lua-language-server && ln -s $NVIM_LSPS/lua-language-server/bin/lua-language-server /usr/local/bin/lua-language-server
+
+########################
+# Manual Installations #
+########################
+
+# Software
+COPY software/neovim /neovim
+COPY software/ohmyzsh $OHMYZSHHOME
+
+# build any copied software that needs it
+RUN cd neovim && make CMAKE_BUILD_TYPE=Release && make install
+
+# Plugins
+COPY plugins/nvim/ $NVIM_PLUGINS
+COPY plugins/tmux/ $TMUX_PLUGINS
+
+# Themes
+COPY themes/zsh/powerlevel10k $OHMYZSHHOME/custom/themes/powerlevel10k
+COPY themes/tmux/tmux2k $TMUX_PLUGINS/tmux2k
+
+# Dotfiles
+COPY dotfiles/nvim/open-env $NVIM_CONFIG
+COPY dotfiles/zsh/zshrc $HOME/.zshrc
+COPY dotfiles/zsh/p10k.zsh $HOME/.p10k.zsh
+COPY dotfiles/zsh/aliases $HOME/.aliases
+COPY dotfiles/tmux/tmux.conf $HOME/.tmux.conf
 
 # Get python-lsp-server
 # * Installed above via apt
