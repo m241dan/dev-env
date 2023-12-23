@@ -4,14 +4,10 @@ vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 
 -- Normal mode keymaps
 vim.keymap.set('n', '<leader><leader>', "<Insert>")
-vim.keymap.set('n', 'j', "<Left>")
-vim.keymap.set('n', 'l', "<Right>")
-vim.keymap.set('n', 'i', "<Up>")
-vim.keymap.set('n', 'k', "<Down>")
-vim.keymap.set('n', 'J', "<Home>")
+vim.keymap.set('n', 'H', "<Home>")
 vim.keymap.set('n', 'L', "<End>")
-vim.keymap.set('n', 'I', "<C-u>zz")
-vim.keymap.set('n', 'K', "<C-d>zz")
+vim.keymap.set('n', 'K', "<C-u>zz")
+vim.keymap.set('n', 'J', "<C-d>zz")
 vim.keymap.set('n', '<leader>di', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<leader>di', "<cmd>lua vim.diagnostic.goto_prev()<CR><Insert>")
 vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_next)
@@ -29,11 +25,7 @@ vim.keymap.set('n', '<leader>wj', "<C-W>h") -- Move to the window left of the cu
 vim.keymap.set('i', '<C-D>', "<Esc>")
 
 -- Visual mode keymaps
-vim.keymap.set('v', 'j', "<Left>")
-vim.keymap.set('v', 'l', "<Right>")
-vim.keymap.set('v', 'i', "<Up>")
-vim.keymap.set('v', 'k', "<Down>")
-vim.keymap.set('v', 'J', "<Home>")
+vim.keymap.set('v', 'H', "<Home>")
 vim.keymap.set('v', 'L', "<End>")
 
 -- Netrw
