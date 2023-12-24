@@ -76,6 +76,12 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 luasnip.config.setup({})
 
+-- Setup CMake LSP Server
+lspconfig.neocmake.setup({
+    -- Neovim specific params
+    on_attach = on_attach,
+})
+
 -- setup for auto completion
 cmp.setup({
   snippet = {

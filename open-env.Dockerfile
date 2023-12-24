@@ -69,6 +69,10 @@ RUN curl -fsSL https://github.com/clangd/clangd/releases/download/17.0.3/clangd-
 RUN curl -fsSL https://github.com/LuaLS/lua-language-server/releases/download/3.7.3/lua-language-server-3.7.3-linux-x64.tar.gz | dd of=lua-language-server.tar.gz \
     && mkdir -p $NVIM_LSPS/lua-language-server && tar -xzf lua-language-server.tar.gz -C $NVIM_LSPS/lua-language-server && ln -s $NVIM_LSPS/lua-language-server/bin/lua-language-server /usr/local/bin/lua-language-server
 
+# Get neocmakelsp
+RUN curl -fsSL https://github.com/Decodetalkers/neocmakelsp/releases/download/v0.6.17/neocmakelsp-x86_64-unknown-linux-gnu | dd of=neocmakelsp \
+    && mkdir -p $NVIM_LSPS/neocmakelsp && mv neocmakelsp $NVIM_LSPS/neocmakelsp/ && chmod u+x $NVIM_LSPS/neocmakelsp/neocmakelsp && ln -s $NVIM_LSPS/neocmakelsp/neocmakelsp /usr/local/bin/neocmakelsp
+
 ########################
 # Manual Installations #
 ########################
