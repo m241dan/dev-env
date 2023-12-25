@@ -31,9 +31,6 @@
 [submodule "plugins/nvim/tree-sitter-lua"]
 	path = plugins/nvim/tree-sitter-lua
 	url = https://github.com/MunifTanjim/tree-sitter-lua
-[submodule "plugins/nvim/nvim-treesitter"]
-	path = plugins/nvim/nvim-treesitter
-	url = https://github.com/nvim-telescope/telescope.nvim
 [submodule "plugins/nvim/darcula-dark.nvim"]
 	path = plugins/nvim/darcula-dark.nvim
 	url = https://github.com/xiantang/darcula-dark.nvim
@@ -70,3 +67,6 @@
 [submodule "plugins/nvim/gitsigns.nvim"]
 	path = plugins/nvim/gitsigns.nvim
 	url = https://github.com/lewis6991/gitsigns.nvim
+[submodule "plugins/nvim/nvim-treesitter"]
+	path = plugins/nvim/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter.git
