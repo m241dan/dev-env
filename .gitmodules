@@ -31,9 +31,6 @@
 [submodule "plugins/nvim/tree-sitter-lua"]
 	path = plugins/nvim/tree-sitter-lua
 	url = https://github.com/MunifTanjim/tree-sitter-lua
-[submodule "plugins/nvim/darcula-dark.nvim"]
-	path = plugins/nvim/darcula-dark.nvim
-	url = https://github.com/xiantang/darcula-dark.nvim
 [submodule "plugins/nvim/LuaSnip"]
 	path = plugins/nvim/LuaSnip
 	url = https://github.com/L3MON4D3/LuaSnip
