@@ -47,6 +47,9 @@ local plugins = {
 
    -- Git plugins
    "lewis6991/gitsigns.nvim",
+
+   -- CMake Tools
+   "Civitasv/cmake-tools.nvim",
 }
 
 local options = {
