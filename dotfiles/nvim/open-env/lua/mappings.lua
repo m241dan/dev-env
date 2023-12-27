@@ -22,11 +22,15 @@ vim.keymap.set('n', '<leader>wl', "<C-W>l") -- Move to the window right of the c
 vim.keymap.set('n', '<leader>wh', "<C-W>h") -- Move to the window left of the current
 
 -- Insert mode keymaps
+vim.keymap.set('i', '<S-Tab>', "<C-D>") -- Allow shift tab to unindent
 vim.keymap.set('i', '<C-D>', "<Esc>")
 
 -- Visual mode keymaps
 vim.keymap.set('v', 'H', "<Home>")
 vim.keymap.set('v', 'L', "<End>")
+vim.keymap.set('v', '<', "<gv") -- stay in visual mode after unindenting
+vim.keymap.set('v', '>', ">gv")  -- stay in visual mode after indenting
+vim.keymap.set('v', '<C-D>', "<Esc>")
 
 -- Netrw
 vim.api.nvim_create_autocmd('filetype', {
