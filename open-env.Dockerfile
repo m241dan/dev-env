@@ -48,7 +48,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     python3-venv \
     gh \
-    tmux
+    tmux \
+    libc++-17-dev
 
 # Setup our user
 RUN userdel -r ubuntu
