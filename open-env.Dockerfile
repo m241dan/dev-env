@@ -108,6 +108,9 @@ COPY dotfiles/tmux/tmux.conf $HOME/.tmux.conf
 # Setup git config for zsh
 RUN git config --global --replace-all core.pager "less -F -X"
 
+# Some clean-up
+RUN rm /etc/apt/sources.list.d/github-cli.list # remove this so it doesn't bork up downstream containers (get some weird key error during 'apt-get update' if this is still there)
+
 # Final settings (leave the image in the state we want to enter)
 RUN chown -R $USER:$USER $HOME  # deal with anything installed / setup as root
 USER $USER
