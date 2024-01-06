@@ -65,6 +65,9 @@ lspconfig.clangd.setup({
     cmd = {
         "clangd",
         "--query-driver='/usr/bin/g++'",
+        "--clang-tidy",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu",
     },
     filetypes = {
         "c", "cpp",
