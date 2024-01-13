@@ -108,6 +108,7 @@ COPY dotfiles/zsh/zshrc $HOME/.zshrc
 COPY dotfiles/zsh/p10k.zsh $HOME/.p10k.zsh
 COPY dotfiles/zsh/aliases $HOME/.aliases
 COPY dotfiles/tmux/tmux.conf $HOME/.tmux.conf
+COPY dotfiles/clangd/config.yaml $HOME/.config/clangd/config.yaml
 
 # Get python-lsp-server
 # * Installed above via apt
