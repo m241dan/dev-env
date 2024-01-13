@@ -80,7 +80,7 @@ lspconfig.clangd.setup({
 })
 
 -- Setup Python LSP Server
-lspconfig.pylsp.setup({})
+lspconfig.pylsp.setup({on_attach = on_attach})
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
