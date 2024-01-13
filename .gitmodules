@@ -73,3 +73,6 @@
 [submodule "plugins/nvim/cmake-tools.nvim"]
 	path = plugins/nvim/cmake-tools.nvim
 	url = https://github.com/Civitasv/cmake-tools.nvim
+[submodule "plugins/nvim/nvim-autopairs"]
+	path = plugins/nvim/nvim-autopairs
+	url = https://github.com/windwp/nvim-autopairs

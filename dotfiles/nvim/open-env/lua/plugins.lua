@@ -43,6 +43,10 @@ local plugins = {
    "L3MON4D3/LuaSnip",
    "saadparwaiz1/cmp_luasnip",
    "hrsh7th/cmp-nvim-lsp",
+   {
+       "windwp/nvim-autopairs",
+       event = "InsertEnter",
+   },
    "lpoto/telescope-docker.nvim",
 
    -- Git plugins
