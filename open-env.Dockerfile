@@ -20,6 +20,7 @@ ARG NVIM_PLUGINS=$NVIM_SHARE/plugins
 ARG NVIM_LSPS=$NVIM_SHARE/lsps
 ARG TMUX_HOME=$HOME/.tmux
 ARG TMUX_PLUGINS=$TMUX_HOME/plugins
+ARG LAZYGIT_VERSION=0.40.2
 
 # Required environmentals
 ENV DEBIAN_FRONTEND=noninteractive
@@ -51,6 +52,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tmux \
     libc++-17-dev \
     ripgrep
+
+# Install packages manually
+RUN curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
+    && tar xf lazygit.tar.gz lazygit \
+    && install lazygit /usr/local/bin \
+    && rm -rf lazygit.tar.gz lazygit
 
 # Setup our user
 RUN userdel -r ubuntu
