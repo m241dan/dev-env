@@ -45,7 +45,7 @@ local on_attach = function(client, bufnr)
   -- attach navbuddy
   local navbuddy = require("nvim-navbuddy")
   navbuddy.attach(client, bufnr)
-  nmap("<leader>nb", navbuddy.open())
+  nmap("<leader>nb", navbuddy.open)
 end
 
 local lspconfig = require("lspconfig")
