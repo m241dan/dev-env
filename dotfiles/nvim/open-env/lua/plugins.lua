@@ -54,6 +54,11 @@ local plugins = {
 
    -- CMake Tools
    "Civitasv/cmake-tools.nvim",
+
+   -- Nav Buddy
+   "MunifTanjim/nui.nvim",
+   "SmiteshP/nvim-navic",
+   "SmiteshP/nvim-navbuddy",
 }
 
 local options = {

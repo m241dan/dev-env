@@ -76,3 +76,12 @@
 [submodule "plugins/nvim/nvim-autopairs"]
 	path = plugins/nvim/nvim-autopairs
 	url = https://github.com/windwp/nvim-autopairs
+[submodule "plugins/nvim/nvim-navic"]
+	path = plugins/nvim/nvim-navic
+	url = https://github.com/SmiteshP/nvim-navic
+[submodule "plugins/nvim/nvim-navbuddy"]
+	path = plugins/nvim/nvim-navbuddy
+	url = https://github.com/SmiteshP/nvim-navbuddy
+[submodule "plugins/nvim/nui.nvim"]
+	path = plugins/nvim/nui.nvim
+	url = https://github.com/MunifTanjim/nui.nvim
