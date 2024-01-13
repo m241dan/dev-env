@@ -115,6 +115,7 @@ COPY dotfiles/clangd/config.yaml $HOME/.config/clangd/config.yaml
 
 # Setup git config for zsh
 RUN git config --global --replace-all core.pager "less -F -X"
+RUN rm -rf /neovim
 
 # Some clean-up
 RUN rm /etc/apt/sources.list.d/github-cli.list # remove this so it doesn't bork up downstream containers (get some weird key error during 'apt-get update' if this is still there)
