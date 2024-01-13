@@ -8,10 +8,8 @@ vim.keymap.set('n', 'H', "<Home>")
 vim.keymap.set('n', 'L', "<End>")
 vim.keymap.set('n', 'K', "<C-u>zz")
 vim.keymap.set('n', 'J', "<C-d>zz")
-vim.keymap.set('n', '<leader>di', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<leader>di', "<cmd>lua vim.diagnostic.goto_prev()<CR><Insert>")
-vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>dK', "<cmd>lua vim.diagnostic.goto_next()<CR><Insert>")
+vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<leader>dj', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<C-k>', "<cmd>res +1<CR>") -- Grow current width height wise
 vim.keymap.set('n', '<C-j>', "<cmd>res -1<CR>") -- Shrink current width height wise
 vim.keymap.set('n', '<C-l>', "<cmd>vert res +1<CR>") -- Grow current window width wise
