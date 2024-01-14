@@ -59,6 +59,12 @@ local plugins = {
    "MunifTanjim/nui.nvim",
    "SmiteshP/nvim-navic",
    "SmiteshP/nvim-navbuddy",
+
+   -- Lsp Signatures (highlights things like which parameter you are on in a function call as you write it)
+   {
+      "ray-x/lsp_signature.nvim",
+      event = "VeryLazy",
+   },
 }
 
 local options = {

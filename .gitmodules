@@ -85,3 +85,6 @@
 [submodule "plugins/nvim/nui.nvim"]
 	path = plugins/nvim/nui.nvim
 	url = https://github.com/MunifTanjim/nui.nvim
+[submodule "plugins/nvim/lsp_signature.nvim"]
+	path = plugins/nvim/lsp_signature.nvim
+	url = https://github.com/ray-x/lsp_signature.nvim

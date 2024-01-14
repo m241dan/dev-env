@@ -46,6 +46,9 @@ local on_attach = function(client, bufnr)
   local navbuddy = require("nvim-navbuddy")
   navbuddy.attach(client, bufnr)
   nmap("<leader>nb", navbuddy.open)
+
+  -- attach signatures
+  require("lsp_signature").on_attach(client, bufnr)
 end
 
 local lspconfig = require("lspconfig")
