@@ -18,6 +18,7 @@ vim.keymap.set('n', '<leader>wk', "<C-W>k") -- Move to the window above of the c
 vim.keymap.set('n', '<leader>wj', "<C-W>j") -- Move to the window below of the current
 vim.keymap.set('n', '<leader>wl', "<C-W>l") -- Move to the window right of the current
 vim.keymap.set('n', '<leader>wh', "<C-W>h") -- Move to the window left of the current
+vim.keymap.set('n', '<C-D>', "<nop>") -- Remove the default ctrl + D motion
 
 -- Insert mode keymaps
 vim.keymap.set('i', '<S-Tab>', "<C-D>") -- Allow shift tab to unindent
