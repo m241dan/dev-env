@@ -24,6 +24,7 @@ local plugins = {
        "nvim-treesitter/nvim-treesitter",
        build = ':TSUpdate',
    },
+   "nvim-treesitter/playground",
 
    -- Darcula Theme
    {

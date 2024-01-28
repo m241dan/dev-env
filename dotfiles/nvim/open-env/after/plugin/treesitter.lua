@@ -9,8 +9,11 @@ parsers.python.install_info.url = plugins_path .. "/tree-sitter-python"
 vim.defer_fn(function()
     require('nvim-treesitter.configs').setup({
         ensure_installed = {'c', 'cpp', 'lua', 'python'},
-        auto_install = false,
-        highlight = {enabled = true},
+        auto_install = true,
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+        },
     })
 end, 0)
 

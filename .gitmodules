@@ -88,3 +88,6 @@
 [submodule "plugins/nvim/lsp_signature.nvim"]
 	path = plugins/nvim/lsp_signature.nvim
 	url = https://github.com/ray-x/lsp_signature.nvim
+[submodule "plugins/nvim/playground"]
+	path = plugins/nvim/playground
+	url = https://github.com/nvim-treesitter/playground.git
