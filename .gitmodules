@@ -67,9 +67,6 @@
 [submodule "plugins/nvim/nvim-treesitter"]
 	path = plugins/nvim/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter.git
-[submodule "plugins/nvim/darcula"]
-	path = plugins/nvim/darcula
-	url = https://github.com/doums/darcula
 [submodule "plugins/nvim/cmake-tools.nvim"]
 	path = plugins/nvim/cmake-tools.nvim
 	url = https://github.com/Civitasv/cmake-tools.nvim
