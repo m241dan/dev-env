@@ -26,11 +26,12 @@ local plugins = {
    },
    "nvim-treesitter/playground",
 
-   -- Darcula Theme
+   -- Color Scheming
+   "rktjmp/lush.nvim",
    {
-       "doums/darcula",
+       "m241dan/ksd_theme",
        config = function()
-           vim.cmd.colorscheme("darcula")
+           vim.cmd.colorscheme("ksd_theme")
        end,
    },
 

@@ -91,3 +91,9 @@
 [submodule "plugins/nvim/playground"]
 	path = plugins/nvim/playground
 	url = https://github.com/nvim-treesitter/playground.git
+[submodule "plugins/nvim/ksd_theme"]
+	path = plugins/nvim/ksd_theme
+	url = https://github.com/m241dan/ksd_theme.git
+[submodule "plugins/nvim/lush.nvim"]
+	path = plugins/nvim/lush.nvim
+	url = https://github.com/rktjmp/lush.nvim
