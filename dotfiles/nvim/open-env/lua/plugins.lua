@@ -67,6 +67,17 @@ local plugins = {
       "ray-x/lsp_signature.nvim",
       event = "VeryLazy",
    },
+
+   -- Notifications, Messages, and Commands
+   {
+       "folke/noice.nvim",
+       event = "VeryLazy",
+       opts = {},
+       dependencies = {
+           "MunifTanjim/nui.nvim",
+           "rcarriga/nvim-notify",
+       },
+   }
 }
 
 local options = {
