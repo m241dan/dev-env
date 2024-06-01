@@ -59,7 +59,7 @@
 	path = plugins/tmux/tmux-sensible
 	url = https://github.com/tmux-plugins/tmux-sensible
 [submodule "themes/tmux/tmux2k"]
-	path = themes/tmux/tmux2k
+	path = plugins/tmux/tmux2k
 	url = https://github.com/2KAbhishek/tmux2k.git
 [submodule "plugins/nvim/gitsigns.nvim"]
 	path = plugins/nvim/gitsigns.nvim
