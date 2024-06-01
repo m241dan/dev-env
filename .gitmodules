@@ -94,3 +94,6 @@
 [submodule "plugins/nvim/lush.nvim"]
 	path = plugins/nvim/lush.nvim
 	url = https://github.com/rktjmp/lush.nvim
+[submodule "software/fzf"]
+	path = software/fzf
+	url = https://github.com/junegunn/fzf.git
