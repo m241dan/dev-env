@@ -97,3 +97,6 @@
 [submodule "software/fzf"]
 	path = software/fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "software/binutils-gdb"]
+	path = software/binutils-gdb
+	url = https://sourceware.org/git/binutils-gdb.git
