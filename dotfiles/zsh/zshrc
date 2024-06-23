@@ -81,6 +81,16 @@ plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
+# bat autocomplete
+fpath=(/opt/bat/autocomplete $fpath)
+autoload -U _bat
+compdef _bat bat
+
+# rg autocomplete
+fpath=(/opt/ripgrep/complete $fpath)
+autoload -U _rg
+compdef _rg rg
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -112,3 +122,18 @@ unsetopt BEEP LIST_BEEP
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */opt/fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/opt/fzf/bin"
+fi
+
+eval "$(fzf --zsh)"
+
+# Setup Bat Extras
+PATH="${PATH:+${PATH}:}/opt/bat-extras/bin"
+
+# Setup opt bin
+PATH="${PATH}:/opt/bin"
+
