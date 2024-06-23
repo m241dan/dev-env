@@ -36,30 +36,24 @@ ZSH_THEMES="${ZSH_THEMES:-$ZSH_CUSTOM/themes}"
 
 
 # Create folders for what we're symlinking if the base roots don't already exist
-echo "Creating base folders for things that will be symlinked from the dev-env repo"
+echo "Creating base folders for things that will be symlinked from the dev-env repo..."
 
 mkdir -p $NVIM_SHARE
-mkdir -p $NVIM_CONFIG
-mkdir -p $NVIM_PLUGINS
-mkdir -p $CLANGD_CONFIG 
-mkdir -p $TMUX_PLUGINS
-mkdir -p $ZSH_THEMES
+mkdir -p $CLANGD_CONFIG
+mkdir -p $ZSH_CUSTOM
 
 # Symlink all files that will be mounted to local locations
 
 echo "Symlinking files in the dev repository..."
-echo "This will allow for changes in local or in a container to be synced by to the repository easily"
+echo "This will allow for changes in local or in a container to be synced by to the repository easily..."
 
 # Software
 ln -sfn $PATH_TO_REPO/software/ohmyzsh $OHMYZSHHOME
 
 # Plugins
-symlink_folder_contents "$PATH_TO_REPO/plugins/nvim" $NVIM_PLUGINS "plugin"
-symlink_folder_contents "$PATH_TO_REPO/plugins/tmux" $TMUX_PLUGINS "plugin"
-
-# Themes
-symlink_folder_contents "$PATH_TO_REPO/themes/zsh" $ZSH_THEMES "theme"
-symlink_folder_contents "$PATH_TO_REPO/themes/tmux" $TMUX_PLUGINS "theme"
+ln -sfn $PATH_TO_REPO/plugins/nvim/ $NVIM_PLUGINS
+ln -sfn $PATH_TO_REPO/plugins/tmux/ $TMUX_PLUGINS
+ln -sfn $PATH_TO_REPO/themes/zsh $ZSH_THEMES
 
 # Dotfiles
 ln -sfn $PATH_TO_REPO/dotfiles/nvim/open-env $NVIM_CONFIG
@@ -69,5 +63,5 @@ ln -sfn $PATH_TO_REPO/dotfiles/zsh/aliases $HOME/.aliases
 ln -sfn $PATH_TO_REPO/dotfiles/tmux/tmux.conf $HOME/.tmux.conf
 ln -sfn $PATH_TO_REPO/dotfiles/clangd/config.yaml $HOME/.config/clangd/config.yaml
 
-
+echo "...Done!"
 
