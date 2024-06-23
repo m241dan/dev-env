@@ -68,15 +68,15 @@ local plugins = {
    },
 
    -- Notifications, Messages, and Commands
-   {
-       "folke/noice.nvim",
-       event = "VeryLazy",
-       opts = {},
-       dependencies = {
-           "MunifTanjim/nui.nvim",
-           "rcarriga/nvim-notify",
-       },
-   }
+--    {
+--        "folke/noice.nvim",
+--        event = "VeryLazy",
+--        opts = {},
+--        dependencies = {
+--            "MunifTanjim/nui.nvim",
+--            "rcarriga/nvim-notify",
+--        },
+--    }
 }
 
 local options = {
