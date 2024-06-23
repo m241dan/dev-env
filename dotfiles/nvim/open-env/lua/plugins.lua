@@ -49,7 +49,6 @@ local plugins = {
        "windwp/nvim-autopairs",
        event = "InsertEnter",
    },
-   "lpoto/telescope-docker.nvim",
 
    -- Git plugins
    "lewis6991/gitsigns.nvim",
