@@ -1,4 +1,5 @@
 alias tmux='tmux -u'
 alias vim='nvim'
 alias preview='fzf --preview "bat --color=always --style=numbers --line-ranges=:500 {}"'
+alias gitk="lazygit"
 
