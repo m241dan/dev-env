@@ -100,6 +100,13 @@ local plugins = {
         },
         opts = {},
     },
+    {
+        "tris203/precognition.nvim",
+        event = "VeryLazy",
+        opts = {
+            startVisible = true,
+        },
+    },
 }
 
 local options = {

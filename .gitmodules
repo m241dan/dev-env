@@ -122,3 +122,6 @@
 	path = plugins/nvim/hardtime.nvim
 	url = https://github.com/m4xshen/hardtime.nvim
     ignore = dirty
+[submodule "plugins/nvim/precognition.nvim"]
+	path = plugins/nvim/precognition.nvim
+	url = https://github.com/tris203/precognition.nvim
