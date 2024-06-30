@@ -59,6 +59,11 @@ require('neodev').setup() -- This adds support for the vim API to the lua_ls
 lspconfig.lua_ls.setup({
     -- Neovim Specific Params
     on_attach = on_attach,
+    cmd = {
+        "lua-language-server",
+        "--log-path=~/.local/state/nvim/lua-language-server/log",
+        "--metapath=~/.local/state/nvim/lua-language-server/meta",
+    },
 
     -- LSP Specific Params
     Lua = {
