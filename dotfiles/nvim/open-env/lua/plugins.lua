@@ -105,6 +105,10 @@ local plugins = {
         event = "VeryLazy",
         opts = {
             startVisible = true,
+            hints = {
+                Caret = {text = "H", prio = 2},
+                Dollar = {text = "L", prio = 1},
+            }
         },
     },
 }
