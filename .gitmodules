@@ -118,3 +118,7 @@
 [submodule "plugins/nvim/nvim-nio"]
 	path = plugins/nvim/nvim-nio
 	url = https://github.com/nvim-neotest/nvim-nio
+[submodule "plugins/nvim/hardtime.nvim"]
+	path = plugins/nvim/hardtime.nvim
+	url = https://github.com/m4xshen/hardtime.nvim
+    ignore = dirty
