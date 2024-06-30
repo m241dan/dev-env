@@ -106,3 +106,15 @@
 [submodule "plugins/nvim/nvim-web-devicons"]
 	path = plugins/nvim/nvim-web-devicons
 	url = https://github.com/nvim-tree/nvim-web-devicons
+[submodule "plugins/nvim/neotest"]
+	path = plugins/nvim/neotest
+	url = https://github.com/nvim-neotest/neotest
+[submodule "plugins/nvim/neotest-python"]
+	path = plugins/nvim/neotest-python
+	url = https://github.com/nvim-neotest/neotest-python
+[submodule "plugins/nvim/FixCursorHold.nvim"]
+	path = plugins/nvim/FixCursorHold.nvim
+	url = https://github.com/antoinemadec/FixCursorHold.nvim
+[submodule "plugins/nvim/nvim-nio"]
+	path = plugins/nvim/nvim-nio
+	url = https://github.com/nvim-neotest/nvim-nio
