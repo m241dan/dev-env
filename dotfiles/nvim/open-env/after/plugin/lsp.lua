@@ -84,7 +84,18 @@ lspconfig.clangd.setup({
 })
 
 -- Setup Python LSP Server
-lspconfig.pylsp.setup({on_attach = on_attach})
+lspconfig.pylsp.setup({
+    on_attach = on_attach,
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = {'E501'},
+                }
+            }
+        }
+    }
+})
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
