@@ -100,3 +100,9 @@
 [submodule "software/binutils-gdb"]
 	path = software/binutils-gdb
 	url = https://sourceware.org/git/binutils-gdb.git
+[submodule "plugins/nvim/lualine.nvim"]
+	path = plugins/nvim/lualine.nvim
+	url = https://github.com/nvim-lualine/lualine.nvim.git
+[submodule "plugins/nvim/nvim-web-devicons"]
+	path = plugins/nvim/nvim-web-devicons
+	url = https://github.com/nvim-tree/nvim-web-devicons
