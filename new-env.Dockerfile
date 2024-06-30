@@ -114,11 +114,11 @@ RUN curl -fsSL https://github.com/clangd/clangd/releases/download/$CLANGD_VERSIO
 # Get and install lua-language-server
 RUN curl -fsSL https://github.com/LuaLS/lua-language-server/releases/download/$LUALS_VERSION/lua-language-server-$LUALS_VERSION-linux-x64.tar.gz | dd of=lua-language-server.tar.gz \
     && mkdir -p $LSPS/lua-language-server && tar -xzf lua-language-server.tar.gz -C $LSPS/lua-language-server && ln -sfn $LSPS/lua-language-server/bin/lua-language-server /opt/bin/lua-language-server \
-    && rm lua-language-server.tar.gz
+    && rm lua-language-server.tar.gz && mkdir -p $LSPS/lua-language-server/log/cache && chmod 777 $LSPS/lua-language-server/log/cache
 
 # Get and install neocmakelsp
 RUN curl -fsSL https://github.com/Decodetalkers/neocmakelsp/releases/download/$NEOCMAKE_VERSION/neocmakelsp-x86_64-unknown-linux-gnu | dd of=neocmakelsp \
-    && mkdir -p $LSPS/neocmakelsp && mv neocmakelsp $LSPS/neocmakelsp/ && chmod u+x $LSPS/neocmakelsp/neocmakelsp && ln -sfn $LSPS/neocmakelsp/neocmakelsp /opt/bin/neocmakelsp
+    && mkdir -p $LSPS/neocmakelsp && mv neocmakelsp $LSPS/neocmakelsp/ && chmod 111 $LSPS/neocmakelsp/neocmakelsp && ln -sfn $LSPS/neocmakelsp/neocmakelsp /opt/bin/neocmakelsp
 
 #
 # Install Terminal goodies
