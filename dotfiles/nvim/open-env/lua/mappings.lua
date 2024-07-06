@@ -4,8 +4,8 @@ vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 
 -- Normal mode keymaps
 vim.keymap.set('n', '<leader><leader>', "<Insert>")
-vim.keymap.set('n', 'H', "<Home>")
-vim.keymap.set('n', 'L', "<End>")
+vim.keymap.set('n', 'H', "^")
+vim.keymap.set('n', 'L', "$")
 vim.keymap.set('n', 'K', "<C-u>zz")
 vim.keymap.set('n', 'J', "<C-d>zz")
 vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_prev)
