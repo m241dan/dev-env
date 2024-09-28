@@ -104,7 +104,7 @@ local plugins = {
         "tris203/precognition.nvim",
         event = "VeryLazy",
         opts = {
-            startVisible = true,
+            startVisible = false,
             hints = {
                 Caret = {text = "H", prio = 2},
                 Dollar = {text = "L", prio = 1},
