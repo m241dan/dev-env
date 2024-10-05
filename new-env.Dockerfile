@@ -5,7 +5,7 @@ ARG OS_VER=24.04
 ARG BUILD_IMAGE=build-env
 ARG BUILD_IMAGE_VER=latest
 
-FROM $OS:$OS_VER as build-env:latest
+FROM $OS:$OS_VER as build-env
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # RUN mkdir -p /gcc/objdir && cd /gcc/objdir && /gcc/configure --disable-multilib && make -j$(nproc) && make install && cd / && rm -rf /gcc
 # RUN mkdir -p /llvm-project/build && cmake -S llvm -B /llvm-project/build -G Ninja -DLLVM_ENABLE_PROJECTS="clang;clang-extra-tools" /llvm-project && cmake --build /llvm-project/build && cmake --build /llvm-project/build --target install && rm -rf /llvm-project
 
-FROM $BUILD_IMAGE:$BUILD_IMAGE_VER as dev-env
+FROM build-env as dev-env
 
 # User stuff
 ARG USER=dkoris
@@ -91,10 +91,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libreadline-dev \
     libevent-dev \
     libncurses-dev \
-    gh
+    gh \
+    npm
 
 # setup path for third party software
-RUN useradd -m -u $UID -s /bin/zsh $USER
+RUN useradd -m -u $UID -s /bin/zsh "$USER"
 
 # Create necessary folders
 RUN mkdir -p $LSPS /opt/bin
@@ -153,9 +154,9 @@ RUN curl -fsSL https://github.com/jesseduffield/lazydocker/releases/download/v$L
 #
 
 # gdb
-RUN curl -fsSL https://ftp.gnu.org/gnu/gdb/gdb-14.2.tar.xz | dd of=gdb.tar.xz && tar -xf gdb.tar.xz && mkdir -p gdb-$GDB_VERSION/build \ 
-    && cd gdb-$GDB_VERSION/build && ../configure --with-system-readline && make -j2 && make install && cd / && rm -rf gdb-$GDB_VERSION \
-    && rm gdb.tar.xz
+#RUN curl -fsSL https://ftp.gnu.org/gnu/gdb/gdb-14.2.tar.xz | dd of=gdb.tar.xz && tar -xf gdb.tar.xz && mkdir -p gdb-$GDB_VERSION/build \ 
+#    && cd gdb-$GDB_VERSION/build && ../configure --with-system-readline && make -j2 && make install && cd / && rm -rf gdb-$GDB_VERSION \
+#    && rm gdb.tar.xz
 
 # neovim
 RUN curl -fsSL https://github.com/neovim/neovim/releases/download/v$NEOVIM_VERSION/nvim-linux64.tar.gz | dd of=neovim.tar.gz && tar -xzvf neovim.tar.gz \
