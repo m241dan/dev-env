@@ -121,6 +121,12 @@ RUN curl -fsSL https://github.com/LuaLS/lua-language-server/releases/download/$L
 RUN curl -fsSL https://github.com/Decodetalkers/neocmakelsp/releases/download/$NEOCMAKE_VERSION/neocmakelsp-x86_64-unknown-linux-gnu | dd of=neocmakelsp \
     && mkdir -p $LSPS/neocmakelsp && mv neocmakelsp $LSPS/neocmakelsp/ && chmod 111 $LSPS/neocmakelsp/neocmakelsp && ln -sfn $LSPS/neocmakelsp/neocmakelsp /opt/bin/neocmakelsp
 
+# Install dockerls
+RUN npm install -g dockerfile-language-server-nodejs
+
+# Install composels
+RUN npm install -g @microsoft/compose-language-service
+
 #
 # Install Terminal goodies
 #

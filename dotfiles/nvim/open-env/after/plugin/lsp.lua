@@ -112,6 +112,22 @@ lspconfig.neocmake.setup({
     on_attach = on_attach,
 })
 
+-- Docker lsp
+lspconfig.dockerls.setup {
+    settings = {
+        docker = {
+            languageserver = {
+                formatter = {
+                    ignoreMultilineInstructions = true,
+                },
+            },
+        }
+    }
+}
+
+-- Compose lsp
+lspconfig.docker_compose_language_service.setup({})
+
 -- setup for auto completion
 cmp.setup({
   snippet = {
