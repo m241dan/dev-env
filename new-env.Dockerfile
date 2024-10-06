@@ -66,6 +66,7 @@ ARG BAT_EXTRAS_VERSION=2024.06.01
 ARG GDB_VERSION=14.2
 ARG NEOVIM_VERSION=0.10.0
 ARG TMUX_VERSION=3.4
+ARG ELIXIR_LSP_VERSION=v0.23.0
 
 ENV TERM=xterm-256color
 
@@ -92,7 +93,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libevent-dev \
     libncurses-dev \
     gh \
-    npm
+    npm \
+    pkg-config
 
 # setup path for third party software
 RUN useradd -m -u $UID -s /bin/zsh "$USER"
@@ -126,6 +128,16 @@ RUN npm install -g dockerfile-language-server-nodejs
 
 # Install composels
 RUN npm install -g @microsoft/compose-language-service
+
+# Install elm lsp
+RUN npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
+
+# Install elixir lsp
+RUN curl -fsSL https://github.com/elixir-lsp/elixir-ls/releases/download/$ELIXIR_LSP_VERSION/elixir-ls-$ELIXIR_LSP_VERSION.zip | dd of=elixir-ls.zip \
+    && mkdir -p $LSPS/elixir-ls && unzip elixir-ls.zip -d $LSPS/elixir-ls && chmod +x $LSPS/elixir-ls/language_server.sh 
+
+# Install gitlab-ci-ls
+RUN cargo install gitlab-ci-ls
 
 #
 # Install Terminal goodies

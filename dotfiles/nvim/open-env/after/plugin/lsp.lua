@@ -128,6 +128,17 @@ lspconfig.dockerls.setup {
 -- Compose lsp
 lspconfig.docker_compose_language_service.setup({})
 
+-- Elixir lsp
+lspconfig.elixirls.setup({
+    cmd = {'/opt/bin/elixirls/language_server.sh'}
+})
+
+-- Elm lsp
+lspconfig.elmls.setup({})
+
+-- Gitlab ci ls
+lspconfig.gitlab_ci_ls.setup({})
+
 -- setup for auto completion
 cmp.setup({
   snippet = {
