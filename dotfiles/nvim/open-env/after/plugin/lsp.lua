@@ -137,7 +137,7 @@ lspconfig.elixirls.setup({
 lspconfig.elmls.setup({})
 
 -- Gitlab ci ls
-lspconfig.gitlab_ci_ls.setup({})
+-- lspconfig.gitlab_ci_ls.setup({})
 
 -- setup for auto completion
 cmp.setup({
