@@ -151,6 +151,9 @@ RUN npm install -g yarn && yarn global add yaml-language-server
 RUN curl -fsSL https://github.com/mrjosh/helm-ls/releases/download/$HELM_LSP_VERSION/helm_ls_linux_amd64 | dd of=helm_ls \
     && mkdir -p $LSPS/helm_ls && chmod +x helm_ls && mv helm_ls $LSPS/helm_ls/helm_ls && ln -sfn $LSPS/helm_ls/helm_ls /opt/bin/helm_ls
 
+# Install bash lsp
+RUN npm install -g bash-language-server
+
 #
 # Install Terminal goodies
 #

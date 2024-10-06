@@ -148,6 +148,9 @@ lspconfig.yamlls.setup({})
 -- HELM lsp
 lspconfig.helm_ls.setup({})
 
+-- BASH lsp
+lspconfig.bashls.setup({})
+
 -- setup for auto completion
 cmp.setup({
   snippet = {
