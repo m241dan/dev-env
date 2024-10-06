@@ -115,7 +115,19 @@ local plugins = {
     {
         "nmac427/guess-indent.nvim",
         config = function () require('guess-indent').setup({}) end,
-    }
+    },
+    -- Auto indent with tab
+    {
+        'vidocqh/auto-indent.nvim',
+        opts = {},
+        config = function() 
+            require("auto-indent").setup({
+                lightmode = true,
+                indentexpr = nil,
+                ignore_filetype = {},
+            })
+        end,
+    },
 }
 
 local options = {

@@ -188,3 +188,6 @@
 [submodule "plugins/nvim/guess-indent.nvim"]
 	path = plugins/nvim/guess-indent.nvim
 	url = https://github.com/NMAC427/guess-indent.nvim
+[submodule "plugins/nvim/auto-indent.nvim"]
+	path = plugins/nvim/auto-indent.nvim
+	url = https://github.com/VidocqH/auto-indent.nvim
