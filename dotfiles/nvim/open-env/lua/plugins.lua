@@ -111,6 +111,11 @@ local plugins = {
             }
         },
     },
+    -- Auto detect indent size
+    {
+        "nmac427/guess-indent.nvim",
+        config = function () require('guess-indent').setup({}) end,
+    }
 }
 
 local options = {

@@ -185,3 +185,6 @@
 [submodule "plugins/nvim/tree-sitter-erlang"]
 	path = plugins/nvim/tree-sitter-erlang
 	url = https://github.com/WhatsApp/tree-sitter-erlang
+[submodule "plugins/nvim/guess-indent.nvim"]
+	path = plugins/nvim/guess-indent.nvim
+	url = https://github.com/NMAC427/guess-indent.nvim
