@@ -176,3 +176,12 @@
 [submodule "plugins/nvim/tree-sitter-xml"]
 	path = plugins/nvim/tree-sitter-xml
 	url = https://github.com/tree-sitter-grammars/tree-sitter-xml
+[submodule "plugins/nvim/tree-sitter-elixir"]
+	path = plugins/nvim/tree-sitter-elixir
+	url = https://github.com/elixir-lang/tree-sitter-elixir
+[submodule "plugins/nvim/tree-sitter-elm"]
+	path = plugins/nvim/tree-sitter-elm
+	url = https://github.com/elm-tooling/tree-sitter-elm
+[submodule "plugins/nvim/tree-sitter-erlang"]
+	path = plugins/nvim/tree-sitter-erlang
+	url = https://github.com/WhatsApp/tree-sitter-erlang

@@ -21,11 +21,15 @@ parsers.rust.install_info.rust = plugins_path .. "/tree-sitter-rust"
 parsers.toml.install_info.toml = plugins_path .. "/tree-sitter-toml"
 parsers.xml.install_info.xml = plugins_path .. "/tree-sitter-xml"
 parsers.yaml.install_info.yaml = plugins_path .. "/tree-sitter-yaml"
+parsers.elm.install_info.elm = plugins_path .. "/tree-sitter-elm"
+parsers.elixir.install_info.elixir = plugins_path .. "/tree-sitter-elixir"
+parsers.erlang.install_info.erlang = plugins_path .. "/tree-sitter-erlang"
 
 vim.defer_fn(function()
     require('nvim-treesitter.configs').setup({
         ensure_installed = {
             'c', 'cpp', 'lua', 'python', 'cmake', 'csv', 'dockerfile', 'doxygen',
+            'elixir', 'elm', 'erlang',
             'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore',
             'go', 'json', 'proto', 'rust', 'toml', 'xml', 'yaml',
         },
