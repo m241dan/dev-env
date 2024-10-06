@@ -139,6 +139,9 @@ lspconfig.elmls.setup({})
 -- Gitlab ci ls
 -- lspconfig.gitlab_ci_ls.setup({})
 
+-- Go LSP
+lspconfig.gopls.setup({})
+
 -- setup for auto completion
 cmp.setup({
   snippet = {

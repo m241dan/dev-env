@@ -139,6 +139,9 @@ RUN curl -fsSL https://github.com/elixir-lsp/elixir-ls/releases/download/$ELIXIR
 # Install gitlab-ci-ls
 RUN cargo install gitlab-ci-ls
 
+# Install go lsp
+RUN go install golang.org/x/tools/gopls@latest
+
 #
 # Install Terminal goodies
 #
