@@ -142,6 +142,12 @@ lspconfig.elmls.setup({})
 -- Go LSP
 lspconfig.gopls.setup({})
 
+-- YAML lsp
+lspconfig.yamlls.setup({})
+
+-- HELM lsp
+lspconfig.helm_ls.setup({})
+
 -- setup for auto completion
 cmp.setup({
   snippet = {

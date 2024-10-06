@@ -67,6 +67,7 @@ ARG GDB_VERSION=14.2
 ARG NEOVIM_VERSION=0.10.0
 ARG TMUX_VERSION=3.4
 ARG ELIXIR_LSP_VERSION=v0.23.0
+ARG HELM_LSP_VERSION=v0.1.0
 
 ENV TERM=xterm-256color
 ENV PATH="/opt/bin:$PATH"
@@ -142,6 +143,13 @@ RUN cargo install --root /opt gitlab-ci-ls
 
 # Install go lsp
 RUN go install golang.org/x/tools/gopls@latest
+
+# Install yaml lsp
+RUN npm install -g yarn && yarn global add yaml-language-server
+
+# Install helm lsp
+RUN curl -fsSL https://github.com/mrjosh/helm-ls/releases/download/$HELM_LSP_VERSION/helm_ls_linux_amd64 | dd of=helm_ls \
+    && mkdir -p $LSPS/helm_ls && chmod +x helm_ls && mv helm_ls $LSPS/helm_ls/helm_ls && ln -sfn $LSPS/helm_ls/helm_ls /opt/bin/helm_ls
 
 #
 # Install Terminal goodies
