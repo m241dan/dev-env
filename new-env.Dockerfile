@@ -142,7 +142,7 @@ RUN curl -fsSL https://github.com/elixir-lsp/elixir-ls/releases/download/$ELIXIR
 RUN cargo install --root /opt gitlab-ci-ls
 
 # Install go lsp
-RUN go install golang.org/x/tools/gopls@latest
+RUN GOBIN=/opt/bin go install golang.org/x/tools/gopls@latest
 
 # Install yaml lsp
 RUN npm install -g yarn && yarn global add yaml-language-server
