@@ -151,6 +151,9 @@ lspconfig.helm_ls.setup({})
 -- BASH lsp
 lspconfig.bashls.setup({})
 
+-- Proto LSP
+-- lspconfig.protols.setup({})
+
 -- setup for auto completion
 cmp.setup({
   snippet = {

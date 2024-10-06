@@ -154,6 +154,9 @@ RUN curl -fsSL https://github.com/mrjosh/helm-ls/releases/download/$HELM_LSP_VER
 # Install bash lsp
 RUN npm install -g bash-language-server
 
+# Install proto lsp
+RUN cargo install --root /opt protols
+
 #
 # Install Terminal goodies
 #
