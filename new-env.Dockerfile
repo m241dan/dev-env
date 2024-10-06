@@ -69,6 +69,7 @@ ARG TMUX_VERSION=3.4
 ARG ELIXIR_LSP_VERSION=v0.23.0
 
 ENV TERM=xterm-256color
+ENV PATH="/opt/bin:$PATH"
 
 #
 # Install package manager things
@@ -137,7 +138,7 @@ RUN curl -fsSL https://github.com/elixir-lsp/elixir-ls/releases/download/$ELIXIR
     && mkdir -p $LSPS/elixir-ls && unzip elixir-ls.zip -d $LSPS/elixir-ls && chmod +x $LSPS/elixir-ls/language_server.sh 
 
 # Install gitlab-ci-ls
-RUN cargo install gitlab-ci-ls
+RUN cargo install --root /opt gitlab-ci-ls
 
 # Install go lsp
 RUN go install golang.org/x/tools/gopls@latest
