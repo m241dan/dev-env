@@ -128,6 +128,8 @@ local plugins = {
             })
         end,
     },
+    -- Auto formatter
+    "elentok/format-on-save.nvim",
 }
 
 local options = {

@@ -191,3 +191,6 @@
 [submodule "plugins/nvim/auto-indent.nvim"]
 	path = plugins/nvim/auto-indent.nvim
 	url = https://github.com/VidocqH/auto-indent.nvim
+[submodule "plugins/nvim/format-on-save.nvim"]
+	path = plugins/nvim/format-on-save.nvim
+	url = https://github.com/elentok/format-on-save.nvim
