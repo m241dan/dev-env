@@ -3,84 +3,84 @@ local path = vim.fn.stdpath("data") .. "/plugins/lazy.nvim"
 vim.opt.rtp:append(path)
 
 local plugins = {
-   -- Telescope
-   {
-       'nvim-telescope/telescope.nvim',
-       branch = '0.1.x',
-       dependencies = {
-           'nvim-lua/plenary.nvim',
-           {
+    -- Telescope
+    {
+        'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 build = 'make',
                 cond = function()
                     return vim.fn.executable('make') == 1
                 end,
-           },
-       },
-   },
+            },
+        },
+    },
 
-   -- Tree-sitter
-   {
-       "nvim-treesitter/nvim-treesitter",
-       build = ':TSUpdate',
-   },
-   "nvim-treesitter/playground",
+    -- Tree-sitter
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ':TSUpdate',
+    },
+    "nvim-treesitter/playground",
 
-   -- Color Scheming
-   "rktjmp/lush.nvim",
-   {
-       "m241dan/ksd_theme",
-       config = function()
-           vim.cmd.colorscheme("ksd_theme")
-       end,
-   },
+    -- Color Scheming
+    "rktjmp/lush.nvim",
+    {
+        "m241dan/ksd_theme",
+        config = function()
+            vim.cmd.colorscheme("ksd_theme")
+        end,
+    },
 
-   -- LSP
-   "neovim/nvim-lspconfig",
-   {"j-hui/fidget.nvim", tag = 'legacy', opts = {}}, -- A progress bar for what the LSP is doing
-   "folke/neodev.nvim", -- lsp support for lua when working on vim specific things
+    -- LSP
+    "neovim/nvim-lspconfig",
+    { "j-hui/fidget.nvim", tag = 'legacy', opts = {} }, -- A progress bar for what the LSP is doing
+    "folke/neodev.nvim",                                -- lsp support for lua when working on vim specific things
 
-   -- Auto complete and snippet support
-   "hrsh7th/nvim-cmp",
-   "L3MON4D3/LuaSnip",
-   "saadparwaiz1/cmp_luasnip",
-   "hrsh7th/cmp-nvim-lsp",
-   {
-       "windwp/nvim-autopairs",
-       event = "InsertEnter",
-   },
+    -- Auto complete and snippet support
+    "hrsh7th/nvim-cmp",
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
+    "hrsh7th/cmp-nvim-lsp",
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+    },
 
-   -- Git plugins
-   "lewis6991/gitsigns.nvim",
+    -- Git plugins
+    "lewis6991/gitsigns.nvim",
 
-   -- CMake Tools
-   "Civitasv/cmake-tools.nvim",
+    -- CMake Tools
+    "Civitasv/cmake-tools.nvim",
 
-   -- Nav Buddy
-   "MunifTanjim/nui.nvim",
-   "SmiteshP/nvim-navic",
-   "SmiteshP/nvim-navbuddy",
+    -- Nav Buddy
+    "MunifTanjim/nui.nvim",
+    "SmiteshP/nvim-navic",
+    "SmiteshP/nvim-navbuddy",
 
-   -- Lsp Signatures (highlights things like which parameter you are on in a function call as you write it)
-   {
-      "ray-x/lsp_signature.nvim",
-      event = "VeryLazy",
-   },
+    -- Lsp Signatures (highlights things like which parameter you are on in a function call as you write it)
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+    },
 
-   -- Notifications, Messages, and Commands
---    {
---        "folke/noice.nvim",
---        event = "VeryLazy",
---        opts = {},
---        dependencies = {
---            "MunifTanjim/nui.nvim",
---            "rcarriga/nvim-notify",
---        },
---    }
+    -- Notifications, Messages, and Commands
+    --    {
+    --        "folke/noice.nvim",
+    --        event = "VeryLazy",
+    --        opts = {},
+    --        dependencies = {
+    --            "MunifTanjim/nui.nvim",
+    --            "rcarriga/nvim-notify",
+    --        },
+    --    }
 
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = {'nvim-tree/nvim-web-devicons'},
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
     },
     {
         "nvim-neotest/neotest",
@@ -106,15 +106,15 @@ local plugins = {
         opts = {
             startVisible = false,
             hints = {
-                Caret = {text = "H", prio = 2},
-                Dollar = {text = "L", prio = 1},
+                Caret = { text = "H", prio = 2 },
+                Dollar = { text = "L", prio = 1 },
             }
         },
     },
     -- Auto detect indent size
     {
         "nmac427/guess-indent.nvim",
-        config = function () require('guess-indent').setup({}) end,
+        config = function() require('guess-indent').setup({}) end,
     },
     -- Auto indent with tab
     {
@@ -145,4 +145,3 @@ local options = {
 }
 
 require("lazy").setup(plugins, options)
-
