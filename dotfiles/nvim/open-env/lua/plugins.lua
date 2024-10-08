@@ -120,7 +120,7 @@ local plugins = {
     {
         'vidocqh/auto-indent.nvim',
         opts = {},
-        config = function() 
+        config = function()
             require("auto-indent").setup({
                 lightmode = true,
                 indentexpr = nil,
