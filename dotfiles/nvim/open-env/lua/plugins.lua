@@ -130,6 +130,14 @@ local plugins = {
     },
     -- Auto formatter
     "elentok/format-on-save.nvim",
+    -- CSV Viewer
+    {
+        'vidocqh/data-viewer.nvim',
+        opts = {},
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        }
+    },
 }
 
 local options = {
