@@ -197,3 +197,6 @@
 [submodule "plugins/nvim/data-viewer.nvim"]
 	path = plugins/nvim/data-viewer.nvim
 	url = https://github.com/VidocqH/data-viewer.nvim
+[submodule "plugins/nvim/foldtext.nvim"]
+	path = plugins/nvim/foldtext.nvim
+	url = https://github.com/OXY2DEV/foldtext.nvim

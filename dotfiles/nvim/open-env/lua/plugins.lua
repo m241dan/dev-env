@@ -138,6 +138,11 @@ local plugins = {
             "nvim-lua/plenary.nvim",
         }
     },
+    -- Code folding
+    {
+        "OXY2DEV/foldtext.nvim",
+        lazy = false,
+    }
 }
 
 local options = {
