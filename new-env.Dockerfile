@@ -202,6 +202,9 @@ COPY --chown=$USER:$USER dotfiles/zsh/aliases $HOME/.aliases
 COPY --chown=$USER:$USER dotfiles/tmux/tmux.conf $HOME/.tmux.conf
 COPY --chown=$USER:$USER dotfiles/clangd/config.yaml $HOME/.config/clangd/config.yaml
 
+# Fonts
+COPY --chown=$USER:$USER fonts/ $HOME/.fonts
+
 #
 # Setup scripts
 #
