@@ -1,7 +1,7 @@
 # Stretch goal of this whole thing would be to abstract the parts of this that depend on the base image, and allow to detect what the base image is and then do the right thing (ie, apt for ubuntu, yum for redhat, etc) and bail out gracefully if the base distro is not configured
 # Setup the base image
 ARG OS=ubuntu
-ARG OS_VER=24.04
+ARG OS_VER=25.04
 ARG BUILD_IMAGE=build-env
 ARG BUILD_IMAGE_VER=latest
 
@@ -28,17 +28,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     curl 
 
-# COPY software/gcc /gcc
-# COPY software/llvm-project /llvm-project
-# 
-# RUN mkdir -p /gcc/objdir && cd /gcc/objdir && /gcc/configure --disable-multilib && make -j$(nproc) && make install && cd / && rm -rf /gcc
-# RUN mkdir -p /llvm-project/build && cmake -S llvm -B /llvm-project/build -G Ninja -DLLVM_ENABLE_PROJECTS="clang;clang-extra-tools" /llvm-project && cmake --build /llvm-project/build && cmake --build /llvm-project/build --target install && rm -rf /llvm-project
-
 FROM build-env as dev-env
 
 # User stuff
 ARG USER=dkoris
 ARG UID=1001
+
 # Relevant Paths
 ARG HOME=/home/$USER
 ARG HOME_CONFIG=$HOME/.config
@@ -53,21 +48,19 @@ ARG TMUX_HOME=$HOME/.tmux
 ARG TMUX_PLUGINS=$HOME/.tmux_plugins
 ARG ZSH_CUSTOM=$HOME/.zsh_plugins
 ARG ZSH_THEMES=$ZSH_CUSTOM/themes
+
 # Software versions
-ARG LAZYGIT_VERSION=0.42.0
-ARG LAZYDOCKER_VERSION=0.23.3
-ARG CLANGD_VERSION=18.1.3
-ARG LUALS_VERSION=3.9.1
-ARG NEOCMAKE_VERSION=v0.6.26
-ARG ZSH_VERSION=5.9 
-ARG RIPGREP_VERSION=14.1.0
-ARG BAT_VERSION=0.24.0
-ARG BAT_EXTRAS_VERSION=2024.06.01
-ARG GDB_VERSION=14.2
-ARG NEOVIM_VERSION=0.10.0
-ARG TMUX_VERSION=3.4
-ARG ELIXIR_LSP_VERSION=v0.23.0
-ARG HELM_LSP_VERSION=v0.1.0
+ARG LAZYGIT_VERSION=0.53.0
+ARG CLANGD_VERSION=20.1.8
+ARG LUALS_VERSION=3.15.0
+ARG NEOCMAKE_VERSION=v0.8.23
+ARG RIPGREP_VERSION=14.1.1
+ARG BAT_VERSION=0.25.0
+ARG BAT_EXTRAS_VERSION=2024.08.24
+ARG NEOVIM_VERSION=0.11.3
+ARG TMUX_VERSION=3.5a
+ARG ELIXIR_LSP_VERSION=v0.28.0
+ARG HELM_LSP_VERSION=v0.4.1
 
 ENV TERM=xterm-256color
 ENV PATH="/opt/bin:$PATH"
@@ -155,7 +148,7 @@ RUN curl -fsSL https://github.com/mrjosh/helm-ls/releases/download/$HELM_LSP_VER
 RUN npm install -g bash-language-server
 
 # Install proto lsp
-RUN cargo install --root /opt protols
+# RUN cargo install --root /opt protols
 
 #
 # Install Terminal goodies
@@ -181,22 +174,13 @@ RUN curl -fsSL https://github.com/eth-p/bat-extras/releases/download/v$BAT_EXTRA
 RUN curl -fsSL https://github.com/jesseduffield/lazygit/releases/download/v$LAZYGIT_VERSION/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz | dd of=lazygit.tar.gz \
     && mkdir -p /opt/lazygit && tar -xzf lazygit.tar.gz -C /opt/lazygit && ln -sfn /opt/lazygit/lazygit /opt/bin/lazygit && rm lazygit.tar.gz
 
-# lazydocker
-RUN curl -fsSL https://github.com/jesseduffield/lazydocker/releases/download/v$LAZYDOCKER_VERSION/lazydocker_${LAZYDOCKER_VERSION}_Linux_x86_64.tar.gz | dd of=lazydocker.tar.gz \
-    && mkdir -p /opt/lazydocker && tar -xzf lazydocker.tar.gz -C /opt/lazydocker && ln -sfn /opt/lazydocker/lazydocker /opt/bin/lazydocker && rm lazydocker.tar.gz
-
 #
 # Dev Tools
 #
 
-# gdb
-#RUN curl -fsSL https://ftp.gnu.org/gnu/gdb/gdb-14.2.tar.xz | dd of=gdb.tar.xz && tar -xf gdb.tar.xz && mkdir -p gdb-$GDB_VERSION/build \ 
-#    && cd gdb-$GDB_VERSION/build && ../configure --with-system-readline && make -j2 && make install && cd / && rm -rf gdb-$GDB_VERSION \
-#    && rm gdb.tar.xz
-
 # neovim
-RUN curl -fsSL https://github.com/neovim/neovim/releases/download/v$NEOVIM_VERSION/nvim-linux64.tar.gz | dd of=neovim.tar.gz && tar -xzvf neovim.tar.gz \
-    && mv nvim-linux64 /opt/nvim && ln -sfn /opt/nvim/bin/nvim /opt/bin/nvim && rm neovim.tar.gz
+RUN curl -fsSL https://github.com/neovim/neovim/releases/download/v$NEOVIM_VERSION/nvim-linux-x86_64.tar.gz | dd of=neovim.tar.gz && tar -xzvf neovim.tar.gz \
+    && mv nvim-linux-x86_64 /opt/nvim && ln -sfn /opt/nvim/bin/nvim /opt/bin/nvim && rm neovim.tar.gz
 
 # tmux
 RUN curl -fsSL https://github.com/tmux/tmux/releases/download/$TMUX_VERSION/tmux-$TMUX_VERSION.tar.gz | dd of=tmux.tar.gz && tar -xzvf tmux.tar.gz \
