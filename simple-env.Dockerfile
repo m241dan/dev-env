@@ -96,8 +96,7 @@ COPY --chown=$USER:$USER dotfiles/clangd/config.yaml $HOME/.config/clangd/config
 #
 # Setup scripts
 #
-COPY setup-env-from-container.sh /scripts
-COPY setup-env-from-repo.sh /scripts
+COPY simple-setup-env-from-container.sh /scripts
 COPY run-env.sh /scripts
 
 USER $USER
