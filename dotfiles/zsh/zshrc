@@ -137,3 +137,4 @@ PATH="${PATH:+${PATH}:}/opt/bat-extras/bin"
 # Setup opt bin
 PATH="${PATH}:/opt/bin"
 
+export PATH="$HOME/.local/bin:$PATH"

@@ -1,7 +1,7 @@
 # Stretch goal of this whole thing would be to abstract the parts of this that depend on the base image, and allow to detect what the base image is and then do the right thing (ie, apt for ubuntu, yum for redhat, etc) and bail out gracefully if the base distro is not configured
 # Setup the base image
 ARG OS=ubuntu
-ARG OS_VER=25.04
+ARG OS_VER=25.10
 ARG BUILD_IMAGE=build-env
 ARG BUILD_IMAGE_VER=latest
 
@@ -21,12 +21,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
     python3-venv \
-    rustc \
-    cargo \
+    rustc-1.88 \
+    cargo-1.88 \
     golang-go \
 # some basic utilities
     unzip \
     curl 
+
+# Ubuntu's versioned rust toolchain lives here; put it ahead of anything else
+ENV PATH="/usr/lib/rust-1.88/bin:$PATH"
 
 FROM build-env as dev-env
 
@@ -98,6 +101,32 @@ RUN useradd -m -u $UID -s /bin/zsh "$USER"
 RUN mkdir -p $LSPS /opt/bin
 
 #
+# Podman in podman (rootless inside rootless)
+#
+ARG NESTED_STORAGE=/var/lib/dev-env-containers
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    podman \
+    crun \
+    uidmap \
+    fuse-overlayfs \
+    passt \
+    slirp4netns
+
+# useradd hands out 100000:65536, which doesn't exist inside the outer
+# container. With --userns=keep-id the outer container has ids 0-65536, so give
+# the user everything except its own uid
+RUN printf "%s:1:%d\n%s:%d:%d\n" "$USER" $((UID - 1)) "$USER" $((UID + 1)) $((65536 - UID)) | tee /etc/subuid > /etc/subgid
+
+COPY dotfiles/podman/containers.conf /etc/containers/dev-env/containers.conf
+COPY dotfiles/podman/storage.conf /etc/containers/dev-env/storage.conf
+COPY dotfiles/podman/registries.conf /etc/containers/registries.conf.d/50-dev-env.conf
+RUN mkdir -p $NESTED_STORAGE && chown $USER:$USER $NESTED_STORAGE
+
+ENV CONTAINERS_CONF_OVERRIDE=/etc/containers/dev-env/containers.conf
+ENV CONTAINERS_STORAGE_CONF=/etc/containers/dev-env/storage.conf
+
+#
 # Install LSPs
 #
 
@@ -125,20 +154,20 @@ RUN npm install -g dockerfile-language-server-nodejs
 RUN npm install -g @microsoft/compose-language-service
 
 # Install elm lsp
-RUN npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
+# RUN npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 
 # Install elixir lsp
 RUN curl -fsSL https://github.com/elixir-lsp/elixir-ls/releases/download/$ELIXIR_LSP_VERSION/elixir-ls-$ELIXIR_LSP_VERSION.zip | dd of=elixir-ls.zip \
     && mkdir -p $LSPS/elixir-ls && unzip elixir-ls.zip -d $LSPS/elixir-ls && chmod +x $LSPS/elixir-ls/language_server.sh 
 
 # Install gitlab-ci-ls
-RUN cargo install --root /opt gitlab-ci-ls
+RUN cargo install --locked --root /opt gitlab-ci-ls
 
 # Install go lsp
 RUN GOBIN=/opt/bin go install golang.org/x/tools/gopls@latest
 
 # Install yaml lsp
-RUN npm install -g yarn && yarn global add yaml-language-server
+RUN npm install -g yarn && yarn global add yaml-language-server@^1
 
 # Install helm lsp
 RUN curl -fsSL https://github.com/mrjosh/helm-ls/releases/download/$HELM_LSP_VERSION/helm_ls_linux_amd64 | dd of=helm_ls \

@@ -10,6 +10,7 @@ format_on_save.setup({
         cpp = formatters.lsp,
         lua = formatters.lsp,
         python = formatters.lsp,
+        elm = formatters.lsp,
     },
     experiments = {
         partial_update = 'diff',
