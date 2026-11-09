@@ -1,12 +1,11 @@
 local path = vim.fn.stdpath("data") .. "/plugins/lazy.nvim"
 
-vim.opt.rtp:append(path)
+vim.opt.rtp:prepend(path)
 
 local plugins = {
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
         dependencies = {
             'nvim-lua/plenary.nvim',
             {
@@ -19,12 +18,13 @@ local plugins = {
         },
     },
 
-    -- Tree-sitter
+    -- Tree-sitter (the `main` branch rewrite; it does not support lazy-loading)
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
         build = ':TSUpdate',
     },
-    "nvim-treesitter/playground",
 
     -- Color Scheming
     "rktjmp/lush.nvim",
@@ -36,9 +36,18 @@ local plugins = {
     },
 
     -- LSP
-    "neovim/nvim-lspconfig",
-    { "j-hui/fidget.nvim", tag = 'legacy', opts = {} }, -- A progress bar for what the LSP is doing
-    "folke/neodev.nvim",                                -- lsp support for lua when working on vim specific things
+    "neovim/nvim-lspconfig", -- server configs consumed by vim.lsp.config / vim.lsp.enable
+    { "j-hui/fidget.nvim", opts = {} }, -- A progress bar for what the LSP is doing
+    {
+        "folke/lazydev.nvim", -- lua_ls support for the Neovim API when working on vim specific things
+        ft = "lua",
+        opts = {
+            library = {
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
+    },
 
     -- Auto complete and snippet support
     "hrsh7th/nvim-cmp",
@@ -87,7 +96,6 @@ local plugins = {
         dependencies = {
             "nvim-neotest/nvim-nio",
             "nvim-lua/plenary.nvim",
-            "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
             "nvim-neotest/neotest-python",
         },
@@ -96,7 +104,6 @@ local plugins = {
         "m4xshen/hardtime.nvim",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
         },
         opts = {},
     },
@@ -119,7 +126,6 @@ local plugins = {
     -- Auto indent with tab
     {
         'vidocqh/auto-indent.nvim',
-        opts = {},
         config = function()
             require("auto-indent").setup({
                 lightmode = true,
@@ -146,7 +152,7 @@ local plugins = {
 }
 
 local options = {
-    root = vim.fn.stdpath("data") .. "/plugins"
+    root = vim.fn.stdpath("data") .. "/plugins",
 }
 
 require("lazy").setup(plugins, options)

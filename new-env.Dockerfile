@@ -1,12 +1,15 @@
 # Stretch goal of this whole thing would be to abstract the parts of this that depend on the base image, and allow to detect what the base image is and then do the right thing (ie, apt for ubuntu, yum for redhat, etc) and bail out gracefully if the base distro is not configured
 # Setup the base image
 ARG OS=ubuntu
-ARG OS_VER=25.10
+ARG OS_VER=26.10
 ARG BUILD_IMAGE=build-env
 ARG BUILD_IMAGE_VER=latest
+# Ubuntu ships versioned rust toolchains (rustc-X.Y / cargo-X.Y); use the newest one in the archive
+ARG RUST_VERSION=1.97
 
-FROM $OS:$OS_VER as build-env
+FROM $OS:$OS_VER AS build-env
 
+ARG RUST_VERSION
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -21,17 +24,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
     python3-venv \
-    rustc-1.88 \
-    cargo-1.88 \
+    rustc-$RUST_VERSION \
+    cargo-$RUST_VERSION \
     golang-go \
 # some basic utilities
     unzip \
     curl 
 
 # Ubuntu's versioned rust toolchain lives here; put it ahead of anything else
-ENV PATH="/usr/lib/rust-1.88/bin:$PATH"
+ENV PATH="/usr/lib/rust-$RUST_VERSION/bin:$PATH"
 
-FROM build-env as dev-env
+FROM build-env AS dev-env
 
 # User stuff
 ARG USER=dkoris
@@ -53,17 +56,18 @@ ARG ZSH_CUSTOM=$HOME/.zsh_plugins
 ARG ZSH_THEMES=$ZSH_CUSTOM/themes
 
 # Software versions
-ARG LAZYGIT_VERSION=0.53.0
-ARG CLANGD_VERSION=20.1.8
-ARG LUALS_VERSION=3.15.0
-ARG NEOCMAKE_VERSION=v0.8.23
-ARG RIPGREP_VERSION=14.1.1
-ARG BAT_VERSION=0.25.0
+ARG LAZYGIT_VERSION=0.66.3
+ARG CLANGD_VERSION=23.1.0
+ARG LUALS_VERSION=3.19.2
+ARG NEOCMAKE_VERSION=v0.12.0
+ARG RIPGREP_VERSION=15.2.0
+ARG BAT_VERSION=0.26.1
 ARG BAT_EXTRAS_VERSION=2024.08.24
-ARG NEOVIM_VERSION=0.11.3
-ARG TMUX_VERSION=3.5a
-ARG ELIXIR_LSP_VERSION=v0.28.0
-ARG HELM_LSP_VERSION=v0.4.1
+ARG NEOVIM_VERSION=0.12.6
+ARG TREE_SITTER_VERSION=0.27.2
+ARG TMUX_VERSION=3.8
+ARG ELIXIR_LSP_VERSION=v0.31.1
+ARG HELM_LSP_VERSION=v0.5.4
 
 ENV TERM=xterm-256color
 ENV PATH="/opt/bin:$PATH"
@@ -144,8 +148,9 @@ RUN curl -fsSL https://github.com/LuaLS/lua-language-server/releases/download/$L
     && rm lua-language-server.tar.gz && mkdir -p $LSPS/lua-language-server/log/cache && chmod 777 $LSPS/lua-language-server/log/cache
 
 # Get and install neocmakelsp
-RUN curl -fsSL https://github.com/Decodetalkers/neocmakelsp/releases/download/$NEOCMAKE_VERSION/neocmakelsp-x86_64-unknown-linux-gnu | dd of=neocmakelsp \
-    && mkdir -p $LSPS/neocmakelsp && mv neocmakelsp $LSPS/neocmakelsp/ && chmod 111 $LSPS/neocmakelsp/neocmakelsp && ln -sfn $LSPS/neocmakelsp/neocmakelsp /opt/bin/neocmakelsp
+RUN curl -fsSL https://github.com/Decodetalkers/neocmakelsp/releases/download/$NEOCMAKE_VERSION/neocmakelsp-x86_64-unknown-linux-gnu.tar.gz | dd of=neocmakelsp.tar.gz \
+    && mkdir -p $LSPS/neocmakelsp && tar -xzf neocmakelsp.tar.gz -C $LSPS/neocmakelsp && chmod 755 $LSPS/neocmakelsp/neocmakelsp \
+    && ln -sfn $LSPS/neocmakelsp/neocmakelsp /opt/bin/neocmakelsp && rm neocmakelsp.tar.gz
 
 # Install dockerls
 RUN npm install -g dockerfile-language-server-nodejs
@@ -200,7 +205,7 @@ RUN curl -fsSL https://github.com/eth-p/bat-extras/releases/download/v$BAT_EXTRA
     && unzip -d /opt/bat-extras/ bat-extras.zip && rm bat-extras.zip
   
 # lazygit
-RUN curl -fsSL https://github.com/jesseduffield/lazygit/releases/download/v$LAZYGIT_VERSION/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz | dd of=lazygit.tar.gz \
+RUN curl -fsSL https://github.com/jesseduffield/lazygit/releases/download/v$LAZYGIT_VERSION/lazygit_${LAZYGIT_VERSION}_linux_x86_64.tar.gz | dd of=lazygit.tar.gz \
     && mkdir -p /opt/lazygit && tar -xzf lazygit.tar.gz -C /opt/lazygit && ln -sfn /opt/lazygit/lazygit /opt/bin/lazygit && rm lazygit.tar.gz
 
 #
@@ -211,15 +216,21 @@ RUN curl -fsSL https://github.com/jesseduffield/lazygit/releases/download/v$LAZY
 RUN curl -fsSL https://github.com/neovim/neovim/releases/download/v$NEOVIM_VERSION/nvim-linux-x86_64.tar.gz | dd of=neovim.tar.gz && tar -xzvf neovim.tar.gz \
     && mv nvim-linux-x86_64 /opt/nvim && ln -sfn /opt/nvim/bin/nvim /opt/bin/nvim && rm neovim.tar.gz
 
+# tree-sitter CLI, used by nvim-treesitter to build parsers
+RUN curl -fsSL https://github.com/tree-sitter/tree-sitter/releases/download/v$TREE_SITTER_VERSION/tree-sitter-cli-linux-x64.zip | dd of=tree-sitter.zip \
+    && mkdir -p /opt/tree-sitter && unzip -o tree-sitter.zip -d /opt/tree-sitter && chmod 755 /opt/tree-sitter/tree-sitter \
+    && ln -sfn /opt/tree-sitter/tree-sitter /opt/bin/tree-sitter && rm tree-sitter.zip
+
 # tmux
 RUN curl -fsSL https://github.com/tmux/tmux/releases/download/$TMUX_VERSION/tmux-$TMUX_VERSION.tar.gz | dd of=tmux.tar.gz && tar -xzvf tmux.tar.gz \
-    && cd tmux-$TMUX_VERSION && ./configure && make -j && make install && cd .. && rm -rf tmux-3.4 tmux.tar.gz
+    && cd tmux-$TMUX_VERSION && ./configure && make -j && make install && cd .. && rm -rf tmux-$TMUX_VERSION tmux.tar.gz
 
 # oh-my-zsh
 COPY --chown=$USER:$USER software/ohmyzsh $OHMYZSHHOME
 
 # Plugins
 COPY --chown=$USER:$USER plugins/nvim/ $NVIM_PLUGINS
+RUN make -C $NVIM_PLUGINS/telescope-fzf-native.nvim && chown -R $USER:$USER $NVIM_PLUGINS/telescope-fzf-native.nvim/build
 COPY --chown=$USER:$USER plugins/tmux/ $TMUX_PLUGINS
 COPY --chown=$USER:$USER themes/zsh $ZSH_THEMES
 

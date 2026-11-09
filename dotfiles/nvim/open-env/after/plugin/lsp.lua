@@ -1,84 +1,84 @@
--- Setup neovim lua configuration
+-- LSP setup using Neovim's native vim.lsp.config / vim.lsp.enable API.
+-- nvim-lspconfig only provides the default server configs (its lsp/*.lua files);
+-- everything below extends those defaults.
 
+-- Capabilities shared by every server (adds nvim-cmp completion support)
+vim.lsp.config('*', {
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
 
--- get the capabilities of our client lsp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- Setup mappings for LSP commands whenever a server attaches to a buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('user-lsp-attach', { clear = true }),
+    callback = function(args)
+        local bufnr = args.buf
+        local builtin = require('telescope.builtin')
 
--- Function to setup mappings for LSP commands when attached
-local on_attach = function(client, bufnr)
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
+        local nmap = function(keys, func, desc)
+            if desc then
+                desc = 'LSP: ' .. desc
+            end
 
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
+            vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+        end
 
-  nmap('<leader>lrn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>lca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        nmap('<leader>lrn', vim.lsp.buf.rename, '[R]e[n]ame')
+        nmap('<leader>lca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-  nmap('<leader>lgd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('<leader>lgr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('<leader>lgu', require('telescope.builtin').lsp_references, '[G]oto [U]sages')
-  nmap('<leader>lgI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>lD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('<leader>lds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>lws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+        nmap('<leader>lgd', builtin.lsp_definitions, '[G]oto [D]efinition')
+        nmap('<leader>lgr', builtin.lsp_references, '[G]oto [R]eferences')
+        nmap('<leader>lgu', builtin.lsp_references, '[G]oto [U]sages')
+        nmap('<leader>lgI', builtin.lsp_implementations, '[G]oto [I]mplementation')
+        nmap('<leader>lD', builtin.lsp_type_definitions, 'Type [D]efinition')
+        nmap('<leader>lds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
+        nmap('<leader>lws', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-  -- See `:help H` for why this keymap
-  nmap('<leader>lh', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<leader>lH', vim.lsp.buf.signature_help, 'Signature Documentation')
+        -- See `:help H` for why this keymap
+        nmap('<leader>lh', vim.lsp.buf.hover, 'Hover Documentation')
+        nmap('<leader>lH', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-  -- Lesser used LSP functionality
-  nmap('<leader>lgD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>lwa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>lwr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
---  nmap('<leader>wl', function()
---    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
---  end, '[W]orkspace [L]ist Folders')
+        -- Lesser used LSP functionality
+        nmap('<leader>lgD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        nmap('<leader>lwa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+        nmap('<leader>lwr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+        --  nmap('<leader>wl', function()
+        --    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        --  end, '[W]orkspace [L]ist Folders')
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+        -- Create a command `:Format` local to the LSP buffer
+        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+            vim.lsp.buf.format()
+        end, { desc = 'Format current buffer with LSP' })
 
-  -- attach navbuddy
-  local navbuddy = require("nvim-navbuddy")
-  navbuddy.attach(client, bufnr)
-  nmap("<leader>nb", navbuddy.open)
+        -- navbuddy attaches itself (see after/plugin/navbuddy.lua); just map it
+        nmap("<leader>nb", require("nvim-navbuddy").open, 'Open [N]av[B]uddy')
 
-  -- attach signatures
-  require("lsp_signature").on_attach(client, bufnr)
-end
+        -- lsp_signature attaches itself through its own LspAttach autocmd
+        -- (see after/plugin/signatures.lua)
+    end,
+})
 
-local lspconfig = require("lspconfig")
-
--- Setup Lua LS
-require('neodev').setup() -- This adds support for the vim API to the lua_ls
-lspconfig.lua_ls.setup({
-    -- Neovim Specific Params
-    on_attach = on_attach,
+-- Lua LS (lazydev.nvim adds the Neovim runtime/plugin library on demand)
+local luals_state = vim.fn.stdpath("state") .. "/lua-language-server"
+vim.lsp.config('lua_ls', {
     cmd = {
         "lua-language-server",
-        "--log-path=~/.local/state/nvim/lua-language-server/log",
-        "--metapath=~/.local/state/nvim/lua-language-server/meta",
+        "--logpath=" .. luals_state .. "/log",
+        "--metapath=" .. luals_state .. "/meta",
     },
-
-    -- LSP Specific Params
-    Lua = {
-        workspace = { checkThirdParty = false },
-        telemetry = { enable = false },
+    settings = {
+        Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+        },
     },
 })
 
--- Setup Clangd
-lspconfig.clangd.setup({
-    -- Neovim specific Params
-    on_attach = on_attach,
+-- Clangd
+vim.lsp.config('clangd', {
     cmd = {
         "clangd",
-        "--query-driver='/usr/bin/g++'",
+        "--query-driver=/usr/bin/g++",
         "--clang-tidy",
         "--completion-style=detailed",
         "--header-insertion=iwyu",
@@ -88,32 +88,21 @@ lspconfig.clangd.setup({
     },
 })
 
--- Setup Python LSP Server
-lspconfig.pylsp.setup({
-    on_attach = on_attach,
+-- Python LSP Server
+vim.lsp.config('pylsp', {
     settings = {
         pylsp = {
             plugins = {
                 pycodestyle = {
-                    ignore = {'E501'},
+                    ignore = { 'E501' },
                 }
             }
         }
     }
 })
 
-local cmp = require('cmp')
-local luasnip = require('luasnip')
-luasnip.config.setup({})
-
--- Setup CMake LSP Server
-lspconfig.neocmake.setup({
-    -- Neovim specific params
-    on_attach = on_attach,
-})
-
 -- Docker lsp
-lspconfig.dockerls.setup {
+vim.lsp.config('dockerls', {
     settings = {
         docker = {
             languageserver = {
@@ -123,38 +112,35 @@ lspconfig.dockerls.setup {
             },
         }
     }
-}
-
--- Compose lsp
-lspconfig.docker_compose_language_service.setup({})
-
--- Elixir lsp
-lspconfig.elixirls.setup({
-    cmd = {'/opt/bin/elixirls/language_server.sh'}
 })
 
--- Elm lsp
-lspconfig.elmls.setup({})
+-- Elixir lsp (installed by the Dockerfile, not on $PATH)
+vim.lsp.config('elixirls', {
+    cmd = { '/opt/lsps/elixir-ls/language_server.sh' },
+})
 
--- Gitlab ci ls
--- lspconfig.gitlab_ci_ls.setup({})
-
--- Go LSP
-lspconfig.gopls.setup({})
-
--- YAML lsp
-lspconfig.yamlls.setup({})
-
--- HELM lsp
-lspconfig.helm_ls.setup({})
-
--- BASH lsp
-lspconfig.bashls.setup({})
-
--- Proto LSP
--- lspconfig.protols.setup({})
+vim.lsp.enable({
+    'lua_ls',
+    'clangd',
+    'pylsp',
+    'neocmake',                        -- CMake
+    'dockerls',                        -- Dockerfiles
+    'docker_compose_language_service', -- Compose files
+    'elixirls',
+    'elmls',
+    -- 'gitlab_ci_ls',
+    'gopls',
+    'yamlls',
+    'helm_ls',
+    'bashls',
+    -- 'protols',
+})
 
 -- setup for auto completion
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+luasnip.config.setup({})
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -194,8 +180,8 @@ cmp.setup({
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'lazydev', group_index = 0 }, -- require() / annotation completion in Neovim lua files
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
 })
-

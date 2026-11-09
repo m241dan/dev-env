@@ -58,19 +58,30 @@ local function is_template()
   vim.api.nvim_win_set_cursor(0, { r, c + 1 })
   vim.cmd("redraw") -- redraw to add the first <
 
-  local old_handler = vim.lsp.handlers["textDocument/signatureHelp"]
-  vim.lsp.handlers["textDocument/signatureHelp"] = function(_, info)
-    if info and info.signatures and info.signatures[1] and info.signatures[1].label then
-      local functionsig = info.signatures[1].label
-      if vim.fn.match({ functionsig }, "^\\w\\+<") == 0 then
-        -- c + 1 is after including the openning pair very shady code lol
-        vim.api.nvim_set_current_line(line:sub(0, c + 1) .. ">" .. line:sub(c + 2))
-      end
-    end
+  -- Ask the LSP directly (vim.lsp.buf.signature_help() no longer goes through
+  -- vim.lsp.handlers since Nvim 0.11, so it can't be intercepted anymore)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local client = vim.lsp.get_clients({ bufnr = bufnr, method = "textDocument/signatureHelp" })[1]
+  if not client then
+    return
   end
 
-  vim.lsp.buf.signature_help()
-  vim.lsp.handlers["textDocument/signatureHelp"] = old_handler
+  local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+  client:request("textDocument/signatureHelp", params, function(err, info)
+    if err or not (info and info.signatures and info.signatures[1] and info.signatures[1].label) then
+      return
+    end
+    -- don't touch the line if the user already moved on
+    if vim.api.nvim_get_current_buf() ~= bufnr or vim.api.nvim_get_current_line() ~= line then
+      return
+    end
+
+    local functionsig = info.signatures[1].label
+    if vim.fn.match({ functionsig }, "^\\w\\+<") == 0 then
+      -- c + 1 is after including the openning pair very shady code lol
+      vim.api.nvim_set_current_line(line:sub(0, c + 1) .. ">" .. line:sub(c + 2))
+    end
+  end, bufnr)
 end
 
 

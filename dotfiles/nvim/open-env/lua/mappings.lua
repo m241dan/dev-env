@@ -8,8 +8,19 @@ vim.keymap.set('n', 'H', "^")
 vim.keymap.set('n', 'L', "$")
 vim.keymap.set('n', 'K', "<C-u>zz")
 vim.keymap.set('n', 'J', "<C-d>zz")
-vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<leader>dj', vim.diagnostic.goto_next)
+-- Jump to the previous/next diagnostic and show it in a float (what the old goto_prev/goto_next did)
+local function diagnostic_jump(count)
+  return function()
+    vim.diagnostic.jump({
+      count = count,
+      on_jump = function(_, bufnr)
+        vim.diagnostic.open_float({ bufnr = bufnr, scope = 'cursor', focus = false })
+      end,
+    })
+  end
+end
+vim.keymap.set('n', '<leader>dk', diagnostic_jump(-1))
+vim.keymap.set('n', '<leader>dj', diagnostic_jump(1))
 vim.keymap.set('n', '<C-k>', "<cmd>res +1<CR>") -- Grow current width height wise
 vim.keymap.set('n', '<C-j>', "<cmd>res -1<CR>") -- Shrink current width height wise
 vim.keymap.set('n', '<C-l>', "<cmd>vert res +1<CR>") -- Grow current window width wise

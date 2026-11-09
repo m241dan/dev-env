@@ -21,16 +21,20 @@
 	url = https://github.com/nvim-telescope/telescope.nvim
 [submodule "plugins/nvim/tree-sitter-c"]
 	path = plugins/nvim/tree-sitter-c
-	url = https://github.com/tree-sitter/tree-sitter-c
+	url = https://github.com/tree-sitter-grammars/tree-sitter-c
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-cpp"]
 	path = plugins/nvim/tree-sitter-cpp
 	url = https://github.com/tree-sitter/tree-sitter-cpp
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-python"]
 	path = plugins/nvim/tree-sitter-python
 	url = https://github.com/tree-sitter/tree-sitter-python
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-lua"]
 	path = plugins/nvim/tree-sitter-lua
-	url = https://github.com/MunifTanjim/tree-sitter-lua
+	url = https://github.com/tree-sitter-grammars/tree-sitter-lua
+	ignore = untracked
 [submodule "plugins/nvim/LuaSnip"]
 	path = plugins/nvim/LuaSnip
 	url = https://github.com/L3MON4D3/LuaSnip
@@ -43,9 +47,6 @@
 [submodule "plugins/nvim/fidget.nvim"]
 	path = plugins/nvim/fidget.nvim
 	url = https://github.com/j-hui/fidget.nvim
-[submodule "plugins/nvim/neodev.nvim"]
-	path = plugins/nvim/neodev.nvim
-	url = https://github.com/folke/neodev.nvim
 [submodule "plugins/nvim/nvim-cmp"]
 	path = plugins/nvim/nvim-cmp
 	url = https://github.com/hrsh7th/nvim-cmp
@@ -85,9 +86,6 @@
 [submodule "plugins/nvim/lsp_signature.nvim"]
 	path = plugins/nvim/lsp_signature.nvim
 	url = https://github.com/ray-x/lsp_signature.nvim
-[submodule "plugins/nvim/playground"]
-	path = plugins/nvim/playground
-	url = https://github.com/nvim-treesitter/playground.git
 [submodule "plugins/nvim/ksd_theme"]
 	path = plugins/nvim/ksd_theme
 	url = https://github.com/m241dan/ksd_theme.git
@@ -112,9 +110,6 @@
 [submodule "plugins/nvim/neotest-python"]
 	path = plugins/nvim/neotest-python
 	url = https://github.com/nvim-neotest/neotest-python
-[submodule "plugins/nvim/FixCursorHold.nvim"]
-	path = plugins/nvim/FixCursorHold.nvim
-	url = https://github.com/antoinemadec/FixCursorHold.nvim
 [submodule "plugins/nvim/nvim-nio"]
 	path = plugins/nvim/nvim-nio
 	url = https://github.com/nvim-neotest/nvim-nio
@@ -128,63 +123,83 @@
 [submodule "plugins/nvim/tree-sitter-cmake"]
 	path = plugins/nvim/tree-sitter-cmake
 	url = https://github.com/uyha/tree-sitter-cmake
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-json"]
 	path = plugins/nvim/tree-sitter-json
 	url = https://github.com/tree-sitter/tree-sitter-json
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-dockerfile"]
 	path = plugins/nvim/tree-sitter-dockerfile
 	url = https://github.com/camdencheek/tree-sitter-dockerfile
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-tmux"]
 	path = plugins/nvim/tree-sitter-tmux
 	url = https://github.com/Freed-Wu/tree-sitter-tmux
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-toml"]
 	path = plugins/nvim/tree-sitter-toml
 	url = https://github.com/tree-sitter-grammars/tree-sitter-toml
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-rust"]
 	path = plugins/nvim/tree-sitter-rust
 	url = https://github.com/tree-sitter/tree-sitter-rust
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-proto"]
 	path = plugins/nvim/tree-sitter-proto
-	url = https://github.com/treywood/tree-sitter-proto
+	url = https://github.com/coder3101/tree-sitter-proto
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-go"]
 	path = plugins/nvim/tree-sitter-go
 	url = https://github.com/tree-sitter/tree-sitter-go
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-gitignore"]
 	path = plugins/nvim/tree-sitter-gitignore
 	url = https://github.com/shunsambongi/tree-sitter-gitignore
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-gitcommit"]
 	path = plugins/nvim/tree-sitter-gitcommit
 	url = https://github.com/gbprod/tree-sitter-gitcommit
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-gitattributes"]
 	path = plugins/nvim/tree-sitter-gitattributes
 	url = https://github.com/tree-sitter-grammars/tree-sitter-gitattributes
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-git-rebase"]
 	path = plugins/nvim/tree-sitter-git-rebase
 	url = https://github.com/the-mikedavis/tree-sitter-git-rebase
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-git-config"]
 	path = plugins/nvim/tree-sitter-git-config
 	url = https://github.com/the-mikedavis/tree-sitter-git-config
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-doxygen"]
 	path = plugins/nvim/tree-sitter-doxygen
 	url = https://github.com/tree-sitter-grammars/tree-sitter-doxygen
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-csv"]
 	path = plugins/nvim/tree-sitter-csv
 	url = https://github.com/tree-sitter-grammars/tree-sitter-csv
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-yaml"]
 	path = plugins/nvim/tree-sitter-yaml
 	url = https://github.com/tree-sitter-grammars/tree-sitter-yaml
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-xml"]
 	path = plugins/nvim/tree-sitter-xml
 	url = https://github.com/tree-sitter-grammars/tree-sitter-xml
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-elixir"]
 	path = plugins/nvim/tree-sitter-elixir
 	url = https://github.com/elixir-lang/tree-sitter-elixir
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-elm"]
 	path = plugins/nvim/tree-sitter-elm
 	url = https://github.com/elm-tooling/tree-sitter-elm
+	ignore = untracked
 [submodule "plugins/nvim/tree-sitter-erlang"]
 	path = plugins/nvim/tree-sitter-erlang
 	url = https://github.com/WhatsApp/tree-sitter-erlang
+	ignore = untracked
 [submodule "plugins/nvim/guess-indent.nvim"]
 	path = plugins/nvim/guess-indent.nvim
 	url = https://github.com/NMAC427/guess-indent.nvim
@@ -200,3 +215,6 @@
 [submodule "plugins/nvim/foldtext.nvim"]
 	path = plugins/nvim/foldtext.nvim
 	url = https://github.com/OXY2DEV/foldtext.nvim
+[submodule "plugins/nvim/lazydev.nvim"]
+	path = plugins/nvim/lazydev.nvim
+	url = https://github.com/folke/lazydev.nvim

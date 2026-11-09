@@ -1,2 +1,8 @@
 software/ohmyzsh/custom/themes/powerlevel10k
-plugins/nvim/nvim-treesitter/parser/*.so
+# build artifacts from running nvim against the repo checkout
+# (rebuilt inside the image / at runtime)
+plugins/nvim/telescope-fzf-native.nvim/build
+plugins/nvim/nvim-treesitter/parser
+plugins/nvim/nvim-treesitter/parser-info
+plugins/nvim/tree-sitter-*/**/parser.so
+plugins/nvim/tree-sitter-*/parser.so
